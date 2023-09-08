@@ -1,0 +1,18 @@
+$font-weights: (
+  'thin': 300,
+  'light': 300,
+  'regular': 300,
+  'medium': 400,
+  'bold': 600,
+  'black': 900,
+);
+
+$card-text-font-weight: map-get(
+  $map: $font-weights,
+  $key: 'regular',
+);
+
+$btn-font-weight: map-get(
+  $map: $font-weights,
+  $key: 'black',
+);

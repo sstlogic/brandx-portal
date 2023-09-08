@@ -1,0 +1,14 @@
+p {
+  font-size: 1rem !important;
+  color: black !important;
+  &:last-of-type {
+    margin-bottom: 0px !important;
+  }
+}
+
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-weight: 300 !important;
+  font-family: 'Roboto-Regular', sans-serif !important;
+}

@@ -1,0 +1,82 @@
+@mixin class-generator($map, $important: false) {
+  @each $name, $styles in $map {
+    #{$name} {
+      @each $key, $value in $styles {
+        #{$key}: $value if($important, !important, null);
+      }
+    }
+  }
+}
+
+$colors: (
+  'black': #000000,
+  'yellow': #f4e44c,
+);
+
+.bg-black {
+  background-color: map-get($map: $colors, $key: 'black');
+}
+
+.text-yellow {
+  color: map-get($map: $colors, $key: 'yellow');
+}
+
+.border-yellow {
+  border-color: map-get($map: $colors, $key: 'yellow') !important;
+  border-width: 3px !important;
+  border-style: solid !important;
+}
+
+.theme--dark.v-btn {
+  color: map-get($map: $colors, $key: 'yellow') !important;
+}
+
+@font-face {
+  font-family: 'Novecentowide';
+  src: url('/fonts/Novecentowide-Bold.otf');
+}
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+.v-card__title {
+  font-family: 'Novecentowide' !important;
+}
+
+.v-card__text {
+  font-size: 1rem !important;
+  color: black;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.gray-card {
+  border: 1px solid var(--v-darkGray-darken1) !important;
+  background-color: var(--v-lightGray-base) !important;
+}
+
+.gray-card-yellow-border {
+  border: 1px solid var(--v-lightYellow-darken1) !important;
+  background-color: var(--v-lightGray-base) !important;
+}
+
+.yellow-border {
+  border: 1px solid var(--v-lightYellow-darken1) !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
