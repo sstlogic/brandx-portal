@@ -22,11 +22,15 @@ const orgTypes = [
   { key: 'GENERAL_PUBLIC', label: 'I am neither, but I have a creative project' },
 ];
 
+const organisation = ['Government', 'Not For Profit', 'For Profit'];
+
 const formData = reactive({
   organisationName: '',
-  organisationType: '',
   organisationAbn: '',
+  orgType: '',
+  roleInOrg: '',
 
+  organisationType: '',
   email: '',
   firstName: '',
   lastName: '',
@@ -40,7 +44,8 @@ const formData = reactive({
   artform: '',
   tcs: '',
   updates: false,
-  insurance: 'No',
+  insurance: '',
+  accurate: '',
   password: '',
 
   website: '',
@@ -88,6 +93,7 @@ export const useRegistrationData = () => {
     next,
     prev,
     progress,
+    organisation,
     updateProgress,
   };
 };

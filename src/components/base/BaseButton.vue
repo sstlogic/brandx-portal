@@ -51,7 +51,7 @@ export default defineComponent({
   .custom-btn {
     font-size: 30px !important;
     font-weight: 900;
-    font-family: 'Roboto-Regular' !important;
+    font-family: 'Roboto-Medium' !important;
     text-transform: none !important;
     font-style: normal !important;
     letter-spacing: 0em;
@@ -80,7 +80,7 @@ export default defineComponent({
   .custom-btn {
     font-size: 36px !important;
     font-weight: 900;
-    font-family: 'Roboto-Regular' !important;
+    font-family: 'Roboto-Medium' !important;
     text-transform: none !important;
     font-style: normal !important;
     letter-spacing: 0em;

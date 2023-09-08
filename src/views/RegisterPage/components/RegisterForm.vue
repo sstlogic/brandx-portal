@@ -32,7 +32,7 @@
             <div class="d-flex">
               <v-checkbox v-model="formData.tcs" color="secondary" hide-details :rules="[rules.required]" label="">
               </v-checkbox>
-              <div class="sub-title-normal pt-5">
+              <div class="sub-title-normal pt-4">
                 I agree to Brand X
                 <a href="https://www.brandx.org.au/artist-pass-terms-and-conditions" target="_blank" @click.stop>
                   terms and conditions
@@ -44,7 +44,9 @@
               <base-button black :disabled="!valid" @click="register" :loading="loading">Sign Up</base-button>
             </div>
             <v-sheet height="30px" />
-            <div class="d-flex justify-center px-20 sub-title-normal">Already an Artist Pass Subscriber in the past?</div>
+            <div class="d-flex justify-center px-20 sub-title-normal">
+              Already an Artist Pass Subscriber in the past?
+            </div>
             <div class="d-flex justify-center sub-title-normal">
               <router-link :to="{ name: routeNames.auth.login }"> Log in to continue </router-link>
             </div>
@@ -165,6 +167,15 @@ export default defineComponent({
     text-align: left;
   }
 
+  .custom-text-field .v-text-field__slot {
+    min-height: 40px !important;
+    font-family: 'Roboto-Regular' !important;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
 
   .sub-title-normal {
     font-family: 'Roboto-Regular' !important;
@@ -212,6 +223,9 @@ export default defineComponent({
     text-align: left;
   }
 
+  .custom-text-field .v-input__icon {
+    padding-top: 10px !important;
+  }
 
   .sub-title-normal {
     font-family: 'Roboto-Regular' !important;

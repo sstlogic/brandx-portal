@@ -39,6 +39,10 @@ $colors: (
   font-family: 'Roboto-Regular';
   src: url('/fonts/Roboto/Roboto-Regular.ttf');
 }
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('/fonts/Roboto/Roboto-Medium.ttf');
+}
 
 .v-card__title {
   font-family: 'Novecentowide' !important;

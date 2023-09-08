@@ -2,9 +2,12 @@
   <div>
     <!-- 1.002 Subscriber Type -->
     <div class="w-full px-4" v-if="step == 1">
-      <div class="tab-title py-4">
+      <div class="tab-title pt-8 pb-md-2 py-sm-4">
         Hi Sam! 👋
-        <div class="pt-5">Which of these options best describes you?</div>
+        <div class="pt-md-1 pt-sm-5">Which of these options best describes you?</div>
+      </div>
+      <div class="sub-title-normal pb-2">
+        Please select the choice that best describes your usage at Brand X so that we can tailor your experience.
       </div>
       <v-form v-model="valid">
         <div>
@@ -14,22 +17,21 @@
                 <div :class="{
                       'rounded-label': true,
                       'rounded-label-active': formData.organisationType === orgType.key,
-                    }" class="rounded-label d-flex my-2 pt-4 pb-2">
+                  }" class="rounded-label d-flex my-2 pt-4 pb-2">
                   <v-radio large :value="orgType.key" :ripple="false" color="black">
                   </v-radio>
-                  <label class="sub-title pt-2" @click="checkRadio(orgType.key)">
+                  <label class="sub-title rounded-label-text pl-4" @click="checkRadio(orgType.key)">
                     {{ orgType.label }}
                   </label>
                 </div>
               </div>
             </v-radio-group>
           </div>
-
-          <v-sheet height="100px" />
+          <v-sheet height="30px" />
           <div class="sub-title-normal">
             <span class="sub-title">None of the above?</span> Get in touch
           </div>
-          <v-sheet height="200px" />
+          <v-sheet height="50px" />
           <div class="d-flex justify-end pt-2">
             <base-button black :disabled="!valid" @click="checkTypeOfOrganization"
               :loading="loading">Continue</base-button>
@@ -43,14 +45,13 @@
         {{ 'We love &lt;usertype&gt;! 💛' }}
       </div>
       <div class="pt-4 sub-title-normal">Help us get to know you and please answer the following questions.. </div>
-      <div class="pt-3 sub-title-normal">What is your primary arts practice?
-      </div>
+      <div class="pt-3 sub-title-normal">What is your primary arts practice?</div>
       <div class="sub-title-normal pt-2">Select one.</div>
       <v-form v-model="valid">
         <div>
           <v-radio-group v-model="formData.artform" row :rules="[rules.required]">
             <div class="d-flex px-2" v-for="(item, index) in artforms" :key="index">
-              <div class="art-radio my-2 py-4 px-4 sub-title" :class="{
+              <div class="art-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
                       'art-radio': true,
                       'art-radio-active': formData.artform === item,
                     }">
@@ -63,7 +64,7 @@
             </div>
           </v-radio-group>
         </div>
-        <div class="d-flex justify-end pt-2">
+        <div class="d-flex justify-end pt-5">
           <base-button black :disabled="!valid" @click="updateArtistFlow(5)" :loading="loading">Continue</base-button>
         </div>
         <v-sheet height="30px" />
@@ -72,7 +73,9 @@
     <!-- 1.005 Contact Info -->
     <div class="w-full px-4" v-if="step == 5">
       <div class="tab-title pt-4">Where can we contact you?</div>
-      <div class="sub-title-normal py-5">For billing and under the rare occasion that we may need to contact you.</div>
+      <div class="sub-title-normal pt-md-4 pb-md-2 py-sm-5">For billing and under the rare occasion that we may need to
+        contact you.
+      </div>
       <v-form v-model="valid" class="pt-4">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Mobile phone number</span> (required)</div>
@@ -103,7 +106,7 @@
             <div class="col sub-title-normal">Do you attest that the information you have provided today is accurate?
             </div>
             <div class="col-auto insurance-radio ">
-              <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]">
+              <v-radio-group row v-model="formData.accurate" :rules="[rules.inArray(['Yes', 'No'])]">
                 <v-radio value="Yes" color="black" :ripple="false" />
                 <label class="mr-3 text sub-title-normal">Yes</label>
                 <v-radio value="No" color="black" :ripple="false" />
@@ -129,8 +132,8 @@
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Website URL</span> (optional)</div>
           <v-text-field v-model="formData.website" dense class="custom-text-field" outlined />
-          <div class="tab-title py-7 mt-10">Would you like to hear from us from time to time?</div>
-          <div class="pt-3 sub-title-normal">
+          <div class="tab-title py-7 mt-5">Would you like to hear from us from time to time?</div>
+          <div class=" sub-title-normal">
             By subscribing to the Brand X newsletter you’ll stay up to date with the latest programs,
             shows and residency information that we have to offer.
           </div>
@@ -145,7 +148,7 @@
             </v-radio-group>
           </div>
         </div>
-        <div class="d-flex justify-end pt-5 mt-10">
+        <div class="d-flex justify-end pt-5">
           <div class="pr-4 pt-3 text-decoration-underline sub-title-normal">skip this question</div>
           <base-button black :disabled="!valid" @click="updateArtistFlow(7)" :loading="loading">Continue</base-button>
         </div>
@@ -154,11 +157,11 @@
     </div>
     <!-- 1.007 Artist Pass Subscription -->
     <div class="w-full px-4" v-if="step == 7">
-      <div class="tab-title pt-4 mt-10">Amazing! You are registered.</div>
+      <div class="tab-title pt-4 mt-5">Amazing! You are registered.</div>
       <div class="tab-title pt-6">
         Based on the information provided, you qualify for an &lt;type&gt; Artist Pass.
       </div>
-      <div class="text-h5 text-center subsidised-space-section px-5 py-10 mt-7">
+      <div class="text-h5 text-center subsidised-space-section px-5 py-7 mt-7">
         <div class="subsidise-title">Subsidised space hire</div>
         <div class="subsidise-description pt-2">
           A subscription costs $20.00 and provides you with great benefits for the next 12-months.
@@ -167,7 +170,7 @@
           our
           standard rate at $66</div>
       </div>
-      <div class="mt-7 py-5">
+      <div class="mt-3 py-5">
         <div class="subsidise-title">Other benefits include</div>
         <div class="subsidise-description pt-1">Free access to A2A workshop programs (value $25)</div>
         <div class="subsidise-description pt-2">$5 off all tickets to our Flying Nun shows</div>
@@ -175,12 +178,64 @@
         <div class="subsidise-description pt-2">Networking opportunities with artists in Sydney</div>
         <div class="subsidise-description pt-2">Discounts from our industry sponsors</div>
       </div>
-      <div class="tab-title mt-10">Do you want an artist pass?</div>
+      <div class="tab-title mt-2">Do you want an artist pass?</div>
       <div class="d-flex justify-end pt-5 mt-10">
         <div class="mr-3 px-2 py-2 rect-btn">No thanks</div>
         <base-button black @click="updateArtistFlow(7)">Yes please</base-button>
       </div>
       <v-sheet height="30px" />
+    </div>
+    <div class="w-full px-4" v-if="step == 3">
+      <div class="tab-title pt-4">Help us get to know you. 💛</div>
+      <div class="sub-title-normal pt-md-4 pb-md-2 py-sm-5">Tell us more about your organisation.</div>
+      <v-form v-model="valid" class="pt-4">
+        <div>
+          <div class="sub-title-normal pb-2"><span class="sub-title">Organisation name</span> (required)</div>
+          <v-text-field v-model="formData.organisationName" dense class="custom-text-field" outlined label=""
+            :rules="[rules.required]" />
+          <div class="sub-title-normal pb-2"><span class="sub-title">Organisation ABN</span> (required)</div>
+          <v-text-field v-model="formData.organisationAbn" dense outlined label="" class="custom-text-field"
+            :rules="[rules.required]" />
+          <div class="sub-title-normal pb-2"><span class="sub-title">Your role in the organisation</span> (required)</div>
+          <v-text-field v-model="formData.roleInOrg" dense class="custom-text-field" outlined label=""
+            :rules="[rules.required]" />
+          <div class="sub-title-normal pb-2">
+            <span class="sub-title">Please choose your organisation type</span> (required)
+          </div>
+          <v-radio-group v-model="formData.orgType" row :rules="[rules.required]">
+            <div class="d-flex px-2" v-for="(item, index) in organisation" :key="index">
+              <div class="art-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
+                      'art-radio': true,
+                      'art-radio-active': formData.orgType === item,
+                    }">
+                <v-radio :value="item" :ripple="false" color="black" class="hidden-radio">
+                </v-radio>
+                <label class="font-weight-bold" @click="checkRadioOrgType(item)">
+                  {{ item }}
+                </label>
+              </div>
+            </div>
+          </v-radio-group>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 sub-title-normal"><span class="sub-title">Do you have Public liability
+                Insurance?</span>
+              (required)</div>
+            <div class="col-md-12 col-sm-12 insurance-radio">
+              <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]">
+                <v-radio value="Yes" color="black" :ripple="false" />
+                <label class="mr-3 text sub-title-normal">Yes</label>
+                <v-radio value="No" color="black" :ripple="false" />
+                <label class="sub-title-normal">No</label>
+              </v-radio-group>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-end pt-5">
+          <base-button black :disabled="!valid" @click="updateArtistFlow(6)" :loading="loading">Continue</base-button>
+        </div>
+        <v-sheet height="30px" />
+      </v-form>
     </div>
     <div class="progress-bar" v-if="formData.organisationType == 'ARTIST' && progress > 0">
       <v-progress-linear :value="progress" :color="'#231F20'" :background-color="'#F4E44C'"></v-progress-linear>
@@ -211,13 +266,10 @@ export default defineComponent({
     const valid = ref(false);
     const isPasswordVisible = ref(false);
     const { loading, withLoader } = useLoader();
-    const { artforms,step, orgTypes, formData, type,updateProgress, progress,typeSelected, isForOrganisation,goToStep, emailExists,next, } =
+    const { artforms, step, orgTypes, formData, type, updateProgress, progress, typeSelected, isForOrganisation, goToStep, emailExists, next, organisation } =
       useRegistrationData();
     const { post } = useApi();
-    
     // const { router } = useRouter();
-
-   
     const checkIfEmailExists = async () =>
       withLoader(async () => {
         emailExists.value = await User.existsByEmail(formData.email);
@@ -238,12 +290,13 @@ export default defineComponent({
         goToStep(4);
       }
     };
-    const updateArtistFlow =async (step:number) => {
+    const updateArtistFlow = async (step: number) => {
+      console.log(formData.organisationType, step, 'formData.organisationType');
       if (formData.organisationType === 'ARTIST') {
         goToStep(step);
         updateProgress(20);
-        console.log(step,'step');
-        console.log(progress.value,'progress');
+        console.log(step, 'step');
+        console.log(progress.value, 'progress');
       }
     };
 
@@ -254,6 +307,10 @@ export default defineComponent({
     const checkRadioArtType = async (value: string) => {
       formData.artform = value;
       console.log(formData.artform,step.value);
+    };
+    const checkRadioOrgType = async (value: string) => {
+      formData.orgType = value;
+      console.log(formData.orgType,step.value);
     };
     console.log(step.value,'step.value' );
     console.log(progress.value,'progress');
@@ -270,8 +327,10 @@ export default defineComponent({
       loading,
       emailExists,
       register,
+      organisation,
       checkTypeOfOrganization,
       checkRadioArtType,
+      checkRadioOrgType,
       updateArtistFlow,
       step,
       next,
@@ -290,134 +349,277 @@ export default defineComponent({
 </script>
 
 <style>
-.custom-text-field .v-input__slot {
-  border-radius: 0px !important;
-  border: 1px solid #231F20 !important;
+/* desktop screen */
+@media only screen and (min-width: 1025px) {
+  .custom-text-field .v-input__slot {
+    border-radius: 0px !important;
+    border: 1px solid #231F20 !important;
+  }
+
+  .custom-text-field .v-input__slot {
+    border-radius: 0px !important;
+    border: 1px solid #231F20 !important;
+  }
+
+  .custom-text-field .v-text-field__slot {
+    min-height: 50px !important;
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .rounded-label {
+    min-height: 65px !important;
+    display: inline-block;
+    border: 3px solid #231F20;
+    border-radius: 20px;
+    padding: 5px 10px;
+    padding-left: 30px !important;
+  }
+
+  .rounded-label-text {
+    padding-top: 0px !important;
+  }
+
+  .custom-radio {
+    height: 30px !important;
+    width: 30px !important;
+  }
+
+  .v-icon.v-icon {
+    font-size: 28px !important;
+  }
+
+  /* active rounded-label */
+  .rounded-label-active {
+    background-color: #F4E44C;
+  }
+
+  .hidden-radio {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .art-radio {
+    display: inline-block;
+    border: 3px solid #231F20;
+    border-radius: 40px;
+    padding: 5px 10px;
+  }
+
+  .art-radio-active {
+    background-color: #F4E44C;
+  }
+
+  .insurance-label {
+    margin-left: 10px;
+  }
+
+  .insurance-radio .v-input--radio-group.v-input--radio-group--row .v-radio {
+    margin-right: 0px;
+  }
+
+  .subsidised-space-section {
+    border-radius: 40px;
+    background: #F4E44C;
+  }
+
+  .sub-title-normal {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .sub-title {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
+
+  .subsidise-title {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
+
+  .subsidise-description {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
+
+  .tab-title {
+    font-family: 'Roboto-Medium' !important;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 42px;
+    letter-spacing: 0em;
+  }
+
+  .rect-btn {
+    border: 3px solid #231F20;
+    font-family: 'Roboto-Medium' !important;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 35.16px;
+    letter-spacing: 0em;
+    padding: 10px 30px !important;
+  }
+
+  .progress-bar {
+    max-width: 250px;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
 }
 
+/* Mobile screen */
+@media only screen and (max-width: 1024px) {
+  .custom-text-field .v-input__slot {
+    border-radius: 0px !important;
+    border: 1px solid #231F20 !important;
+  }
 
-.custom-text-field .v-input__slot {
-  border-radius: 0px !important;
-  border: 1px solid #231F20 !important;
-}
 
-.custom-text-field .v-text-field__slot {
-  min-height: 50px !important;
-  font-family: 'Roboto-Regular' !important;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 28px;
-  letter-spacing: 0em;
-  text-align: left;
-}
+  .custom-text-field .v-input__slot {
+    border-radius: 0px !important;
+    border: 1px solid #231F20 !important;
+  }
 
-.rounded-label {
-  min-height: 80px !important;
-  display: inline-block;
-  border: 3px solid #231F20;
-  border-radius: 20px;
-  padding: 5px 10px;
-  padding-left: 30px !important;
-}
+  .custom-text-field .v-text-field__slot {
+    min-height: 50px !important;
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
 
-.custom-radio {
-  height: 30px !important;
-  width: 30px !important;
-}
+  .rounded-label {
+    min-height: 80px !important;
+    display: inline-block;
+    border: 3px solid #231F20;
+    border-radius: 20px;
+    padding: 5px 10px;
+    padding-left: 30px !important;
+  }
 
-.v-icon.v-icon {
-  font-size: 28px !important;
-}
+  .rounded-label-text {
+    padding-top: 5px !important;
+  }
 
-/* active rounded-label */
-.rounded-label-active {
-  background-color: #F4E44C;
-}
+  .custom-radio {
+    height: 30px !important;
+    width: 30px !important;
+  }
 
-.hidden-radio {
-  position: absolute;
-  left: -9999px;
-}
+  .v-icon.v-icon {
+    font-size: 28px !important;
+  }
 
-.art-radio {
-  display: inline-block;
-  border: 3px solid #231F20;
-  border-radius: 40px;
-  padding: 5px 10px;
-}
+  /* active rounded-label */
+  .rounded-label-active {
+    background-color: #F4E44C;
+  }
 
-.art-radio-active {
-  background-color: #F4E44C;
-}
+  .hidden-radio {
+    position: absolute;
+    left: -9999px;
+  }
 
-.insurance-label {
-  margin-left: 10px;
-}
+  .art-radio {
+    display: inline-block;
+    border: 3px solid #231F20;
+    border-radius: 40px;
+    padding: 5px 10px;
+  }
 
-.insurance-radio .v-input--radio-group.v-input--radio-group--row .v-radio {
-  margin-right: 0px;
-}
+  .art-radio-active {
+    background-color: #F4E44C;
+  }
 
-.subsidised-space-section {
-  border-radius: 40px;
-  background: #F4E44C;
-}
+  .insurance-label {
+    margin-left: 10px;
+  }
 
-.sub-title-normal {
-  font-family: 'Roboto-Regular' !important;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 28px;
-  letter-spacing: 0em;
-  text-align: left;
-}
+  .insurance-radio .v-input--radio-group.v-input--radio-group--row .v-radio {
+    margin-right: 0px;
+  }
 
-.sub-title {
-  font-family: 'Roboto-Regular' !important;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 28px;
-  letter-spacing: 0em;
-}
+  .subsidised-space-section {
+    border-radius: 40px;
+    background: #F4E44C;
+  }
 
-.subsidise-title {
-  font-family: 'Roboto-Regular' !important;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 28px;
-  letter-spacing: 0em;
-}
+  .sub-title-normal {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
 
-.subsidise-description {
-  font-family: 'Roboto-Regular' !important;
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: 0em;
-}
+  .sub-title {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
 
-.tab-title {
-  font-family: 'Roboto-Regular' !important;
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 42px;
-  letter-spacing: 0em;
-}
+  .subsidise-title {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
 
-.rect-btn {
-  border: 3px solid #231F20;
-  font-family: 'Roboto-Regular' !important;
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 42px;
-  letter-spacing: 0em;
-  text-align: left;
-  padding: 10px 30px !important;
-}
+  .subsidise-description {
+    font-family: 'Roboto-Regular' !important;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
 
-.progress-bar {
-  max-width: 250px;
-  margin: 0 auto;
-  padding-top: 30px;
+  .tab-title {
+    font-family: 'Roboto-Medium' !important;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 42px;
+    letter-spacing: 0em;
+  }
+
+  .rect-btn {
+    border: 3px solid #231F20;
+    font-family: 'Roboto-Medium' !important;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 42px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding: 10px 30px !important;
+  }
+
+  .progress-bar {
+    max-width: 250px;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
 }
 </style>
