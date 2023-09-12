@@ -20,4 +20,8 @@ export type BookedUser = {
   postcode: string;
   insurance: boolean;
   organisationAbn: string;
+  accountType: string;
+  accurate: boolean;
+  website: string;
+  hear_from_us: string;
 };

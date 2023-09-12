@@ -2,24 +2,12 @@
   <div>
     <v-app-bar app height="75" flat clipped-right fixed dense style="z-index: 90">
       <v-app-bar-title class="pa-2">
-        <v-img
-          :src="require('@/assets/brandx-black.svg')"
-          height="100%"
-          max-height="75px"
-          width="170px"
-          @click="goHome"
-          contain
-          class="cursor-pointer"
-        />
+        <v-img :src="require('@/assets/brandx-black.svg')" height="100%" max-height="75px" width="170px" @click="goHome"
+          contain class="cursor-pointer" />
       </v-app-bar-title>
       <v-spacer />
-      <v-sheet
-        v-if="isAuthed && isMember"
-        width="75"
-        height="75"
-        color="yellow"
-        class="d-flex justify-center align-center"
-      >
+      <v-sheet v-if="isAuthed && isMember" width="75" height="75" color="yellow"
+        class="d-flex justify-center align-center">
         <v-btn icon outlined :to="{ name: routeNames.checkout }">
           <v-icon>mdi-cart</v-icon>
         </v-btn>

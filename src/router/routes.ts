@@ -39,12 +39,20 @@ export const routes: Array<RouteConfig> = [
       layout: 'MemberLayout',
     },
   },
+  // {
+  //   path: '/home',
+  //   name: routeNames.home,
+  //   component: () => import('@/views/HomePage/HomePage.vue'),
+  //   meta: {
+  //     layout: 'MemberLayout',
+  //   },
+  // },
   {
     path: '/login',
     name: routeNames.auth.login,
     component: () => import('@/views/LoginPage/LoginPage.vue'),
     meta: {
-      layout: 'MemberLayout',
+      layout: 'SubscriptionLayout',
     },
   },
   {
@@ -52,7 +60,7 @@ export const routes: Array<RouteConfig> = [
     name: routeNames.auth.register,
     component: () => import('@/views/RegisterPage/RegisterPage.vue'),
     meta: {
-      layout: 'MemberLayout',
+      layout: 'SubscriptionLayout',
     },
   },
   {
@@ -60,7 +68,7 @@ export const routes: Array<RouteConfig> = [
     name: routeNames.subscriber,
     component: () => import('@/views/SubscriberPage/SubscriberPage.vue'),
     meta: {
-      layout: 'MemberLayout',
+      layout: 'SubscriptionLayout',
     },
   },
   {

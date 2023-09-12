@@ -15,11 +15,11 @@ const artforms = ref([
   'Other',
 ]);
 
-// const orgTypes = ['Sole Trader', 'Not For Profit entity', 'For Profit entity', 'Partnership', 'Trust'];
-const orgTypes = [
-  { key: 'ARTIST', label: 'I am an individual artist' },
-  { key: 'ARTS_ORGS', label: 'We are an arts organization' },
-  { key: 'GENERAL_PUBLIC', label: 'I am neither, but I have a creative project' },
+const orgTypes = ['Sole Trader', 'Not For Profit entity', 'For Profit entity', 'Partnership', 'Trust'];
+const accountType = [
+  { key: 'Artist', label: 'I am an individual artist', rate: 24.0 },
+  { key: 'Arts_Organisation', label: 'We are an arts organization', rate: 33.0 },
+  { key: 'General_Public', label: 'I am neither, but I have a creative project', rate: 66.0 },
 ];
 
 const organisation = ['Government', 'Not For Profit', 'For Profit'];
@@ -29,8 +29,8 @@ const formData = reactive({
   organisationAbn: '',
   orgType: '',
   roleInOrg: '',
-
   organisationType: '',
+  accountType: '',
   email: '',
   firstName: '',
   lastName: '',
@@ -40,14 +40,12 @@ const formData = reactive({
   country: '',
   postcode: '',
   phone: '',
-
   artform: '',
   tcs: '',
   updates: false,
   insurance: '',
   accurate: '',
   password: '',
-
   website: '',
   hear_from_us: '',
 });
@@ -82,6 +80,7 @@ watch(isForOrganisation, (val: boolean) => {
 export const useRegistrationData = () => {
   return {
     artforms,
+    accountType,
     orgTypes,
     formData,
     type,

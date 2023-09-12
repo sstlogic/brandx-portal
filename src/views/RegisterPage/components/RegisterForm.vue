@@ -1,7 +1,7 @@
 <template>
   <div class=" px-4">
-    <div class="tab-title py-4">Create a Brand X Account</div>
-    <div class="sub-title-normal py-4">To book a space or sign up for Artist Pass Access first make an account.</div>
+    <div class="tab-title pt-4">Create a Brand X Account</div>
+    <div class="sub-title-normal py-sm-4">To book a space or sign up for Artist Pass Access first make an account.</div>
     <div class="pt-3">
       <v-form v-model="valid">
         <v-expand-transition>
@@ -32,7 +32,7 @@
             <div class="d-flex">
               <v-checkbox v-model="formData.tcs" color="secondary" hide-details :rules="[rules.required]" label="">
               </v-checkbox>
-              <div class="sub-title-normal pt-4">
+              <div class="sub-title-normal ">
                 I agree to Brand X
                 <a href="https://www.brandx.org.au/artist-pass-terms-and-conditions" target="_blank" @click.stop>
                   terms and conditions
@@ -50,7 +50,6 @@
             <div class="d-flex justify-center sub-title-normal">
               <router-link :to="{ name: routeNames.auth.login }"> Log in to continue </router-link>
             </div>
-            <v-sheet height="30px" />
           </div>
         </v-expand-transition>
       </v-form>
@@ -81,7 +80,7 @@ export default defineComponent({
     const valid = ref(false);
     const isPasswordVisible = ref(false);
     const { loading, withLoader } = useLoader();
-    const { artforms, orgTypes, formData, type, typeSelected, isForOrganisation, emailExists, next } =
+    const { artforms, accountType, formData, type, typeSelected, isForOrganisation, emailExists, next } =
       useRegistrationData();
     const { post } = useApi();
     const { router } = useRouter();
@@ -94,9 +93,9 @@ export default defineComponent({
     const register = async () => {
       withLoader(async () => {
         const response = await post('/users', snakeKeys(formData)).catch((errors) => mapErrors(errors));
-        // await login(formData.email, formData.password);
         console.log(response, 'response');
         if (response !== undefined) {
+          await login(formData.email, formData.password);
           router.push({ name: routeNames.subscriber });
         }
       });
@@ -110,8 +109,8 @@ export default defineComponent({
           const { storeLogin } = useAuthStore();
 
           storeLogin(user);
-
-          router.push({ name: routeNames.profile.billing });
+          // router.push({ name: routeNames.subscriber });
+          // router.push({ name: routeNames.profile.billing });
         }
       });
 
@@ -129,7 +128,7 @@ export default defineComponent({
       formData,
       rules,
       valid,
-      orgTypes,
+      accountType,
       artforms,
       loading,
       emailExists,
@@ -146,7 +145,16 @@ export default defineComponent({
 </script>
 
 <style>
+.v-input--selection-controls {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
 @media only screen and (min-width: 1025px) {
+  /* .v-text-field {
+    padding-top: -30px !important;
+    margin-top: -30px !important;
+  } */
 
   /* Your CSS styles for desktop screens go here */
 

@@ -4,7 +4,8 @@
     <div class="w-full px-4" v-if="step == 1">
       <div class="tab-title pt-8 pb-md-2 py-sm-4">
         Hi Sam! 👋
-        <div class="pt-md-1 pt-sm-5">Which of these options best describes you?</div>
+        <!-- <div class="pt-md-3 pt-sm-5">Which of these options best describes you?</div> -->
+        <div class="pt-md-3 pt-sm-5">Which best describes you?</div>
       </div>
       <div class="sub-title-normal pb-2">
         Please select the choice that best describes your usage at Brand X so that we can tailor your experience.
@@ -12,25 +13,22 @@
       <v-form v-model="valid">
         <div>
           <div>
-            <v-radio-group v-model="formData.organisationType" column :rules="[rules.required]">
-              <div class="" v-for="(orgType, index) in orgTypes" :key="index">
+            <v-radio-group v-model="formData.accountType" column :rules="[rules.required]">
+              <div class="" v-for="(orgType, index) in accountType" :key="index">
                 <div :class="{
                       'rounded-label': true,
-                      'rounded-label-active': formData.organisationType === orgType.key,
+                      'rounded-label-active': formData.accountType === orgType.key,
                   }" class="rounded-label d-flex my-2 pt-4 pb-2">
-                  <v-radio large :value="orgType.key" :ripple="false" color="black">
-                  </v-radio>
+                  <v-radio large :value="orgType.key" :ripple="false" color="black"> </v-radio>
                   <label class="sub-title rounded-label-text pl-4" @click="checkRadio(orgType.key)">
-                    {{ orgType.label }}
+                    {{ orgType.label}}
                   </label>
                 </div>
               </div>
             </v-radio-group>
           </div>
           <v-sheet height="30px" />
-          <div class="sub-title-normal">
-            <span class="sub-title">None of the above?</span> Get in touch
-          </div>
+          <div class="sub-title-normal"><span class="sub-title">None of the above?</span> Get in touch</div>
           <v-sheet height="50px" />
           <div class="d-flex justify-end pt-2">
             <base-button black :disabled="!valid" @click="checkTypeOfOrganization"
@@ -42,11 +40,12 @@
     <!-- 1.003 Art Practice -->
     <div class="w-full px-4" v-if="step == 2">
       <div class="tab-title pt-4">
-        {{ 'We love &lt;usertype&gt;! 💛' }}
+        {{ 'We love ' + formData.accountType + '! 💛' }}
       </div>
-      <div class="pt-4 sub-title-normal">Help us get to know you and please answer the following questions.. </div>
-      <div class="pt-3 sub-title-normal">What is your primary arts practice?</div>
-      <div class="sub-title-normal pt-2">Select one.</div>
+      <div class="pt-4 sub-title-normal description-m">Help us get to know you and please answer the following questions..
+      </div>
+      <div class=" sub-title-normal description-m">What is your primary arts practice?</div>
+      <div class="sub-title-normal pt-2 description-m">Select one.</div>
       <v-form v-model="valid">
         <div>
           <v-radio-group v-model="formData.artform" row :rules="[rules.required]">
@@ -67,7 +66,6 @@
         <div class="d-flex justify-end pt-5">
           <base-button black :disabled="!valid" @click="updateArtistFlow(5)" :loading="loading">Continue</base-button>
         </div>
-        <v-sheet height="30px" />
       </v-form>
     </div>
     <!-- 1.005 Contact Info -->
@@ -118,12 +116,11 @@
         <div class="d-flex justify-end pt-5">
           <base-button black :disabled="!valid" @click="updateArtistFlow(6)" :loading="loading">Continue</base-button>
         </div>
-        <v-sheet height="30px" />
       </v-form>
     </div>
     <!-- 1.006 Online Info -->
     <div class="w-full px-4" v-if="step == 6">
-      <div class="tab-title py-4 mt-10">Where can we find you online?</div>
+      <div class="tab-title py-4">Where can we find you online?</div>
       <div class="pt-2 sub-title-normal">
         Getting to know our community helps us to connect artists and opportunities. If you are comfortable please share
         your online details.
@@ -132,13 +129,12 @@
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Website URL</span> (optional)</div>
           <v-text-field v-model="formData.website" dense class="custom-text-field" outlined />
-          <div class="tab-title py-7 mt-5">Would you like to hear from us from time to time?</div>
-          <div class=" sub-title-normal">
+          <div class="tab-title py-7">Would you like to hear from us from time to time?</div>
+          <div class="sub-title-normal">
             By subscribing to the Brand X newsletter you’ll stay up to date with the latest programs,
             shows and residency information that we have to offer.
           </div>
-          <div class="pt-4 sub-title-normal"> Be the first to know and subscribe to our newsletter.
-          </div>
+          <div class="pt-4 sub-title-normal">Be the first to know and subscribe to our newsletter.</div>
           <div class="w-full pt-3">
             <v-radio-group row v-model="formData.hear_from_us" :rules="[rules.inArray(['Yes', 'No'])]">
               <v-radio value="Yes" color="black" :ripple="false" />
@@ -152,23 +148,25 @@
           <div class="pr-4 pt-3 text-decoration-underline sub-title-normal">skip this question</div>
           <base-button black :disabled="!valid" @click="updateArtistFlow(7)" :loading="loading">Continue</base-button>
         </div>
-        <v-sheet height="30px" />
       </v-form>
     </div>
     <!-- 1.007 Artist Pass Subscription -->
     <div class="w-full px-4" v-if="step == 7">
       <div class="tab-title pt-4 mt-5">Amazing! You are registered.</div>
       <div class="tab-title pt-6">
-        Based on the information provided, you qualify for an &lt;type&gt; Artist Pass.
+        Based on the information provided, you qualify for an {{ formData.accountType }} Artist Pass.
       </div>
-      <div class="text-h5 text-center subsidised-space-section px-5 py-7 mt-7">
+      <div class="text-h5 text-center subsidised-space-section image-container px-5 py-7 mt-7">
+        <div class="diamond">
+          <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
+        </div>
         <div class="subsidise-title">Subsidised space hire</div>
         <div class="subsidise-description pt-2">
           A subscription costs $20.00 and provides you with great benefits for the next 12-months.
         </div>
-        <div class="subsidise-description pt-5">Starting from &lt;usertype_rate&gt; per hour &lt;saving&gt;% saving off
-          our
-          standard rate at $66</div>
+        <div class="subsidise-description pt-5">
+          Starting from ${{ getType('rate') }}.00 per hour {{ getType('saving') }}% saving off our standard rate at $66
+        </div>
       </div>
       <div class="mt-3 py-5">
         <div class="subsidise-title">Other benefits include</div>
@@ -179,11 +177,12 @@
         <div class="subsidise-description pt-2">Discounts from our industry sponsors</div>
       </div>
       <div class="tab-title mt-2">Do you want an artist pass?</div>
-      <div class="d-flex justify-end pt-5 mt-10">
-        <div class="mr-3 px-2 py-2 rect-btn">No thanks</div>
+      <div class="d-flex justify-end pt-5 mt-5">
+        <div class="mr-3 px-2 py-2">
+          <router-link :to="{ name: routeNames.home }" class="rect-btn">No thanks</router-link>
+        </div>
         <base-button black @click="updateArtistFlow(7)">Yes please</base-button>
       </div>
-      <v-sheet height="30px" />
     </div>
     <div class="w-full px-4" v-if="step == 3">
       <div class="tab-title pt-4">Help us get to know you. 💛</div>
@@ -207,9 +206,8 @@
               <div class="art-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
                       'art-radio': true,
                       'art-radio-active': formData.orgType === item,
-                    }">
-                <v-radio :value="item" :ripple="false" color="black" class="hidden-radio">
-                </v-radio>
+                }">
+                <v-radio :value="item" :ripple="false" color="black" class="hidden-radio"> </v-radio>
                 <label class="font-weight-bold" @click="checkRadioOrgType(item)">
                   {{ item }}
                 </label>
@@ -218,9 +216,9 @@
           </v-radio-group>
 
           <div class="row">
-            <div class="col-md-12 col-sm-12 sub-title-normal"><span class="sub-title">Do you have Public liability
-                Insurance?</span>
-              (required)</div>
+            <div class="col-md-12 col-sm-12 sub-title-normal">
+              <span class="sub-title">Do you have Public liability Insurance?</span> (required)
+            </div>
             <div class="col-md-12 col-sm-12 insurance-radio">
               <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]">
                 <v-radio value="Yes" color="black" :ripple="false" />
@@ -232,15 +230,15 @@
           </div>
         </div>
         <div class="d-flex justify-end pt-5">
-          <base-button black :disabled="!valid" @click="updateArtistFlow(6)" :loading="loading">Continue</base-button>
+          <!-- <base-button black :disabled="!valid" @click="updateArtistFlow(6)" :loading="loading">Continue</base-button> -->
+          <base-button black :disabled="!valid" @click="updateUser()" :loading="loading">Continue</base-button>
         </div>
         <v-sheet height="30px" />
       </v-form>
     </div>
-    <div class="progress-bar" v-if="formData.organisationType == 'ARTIST' && progress > 0">
+    <div class="progress-bar" v-if="formData.accountType == 'Artist' && progress > 0">
       <v-progress-linear :value="progress" :color="'#231F20'" :background-color="'#F4E44C'"></v-progress-linear>
     </div>
-    <v-sheet height="30px" />
   </div>
 </template>
 <script lang="ts">
@@ -256,7 +254,9 @@ import { useRegistrationData } from '@/composables/useRegistrationData';
 import { mdiEyeOutline } from '@mdi/js';
 import { useApi } from '@/composables/useApi';
 import { snakeKeys } from '@/utils/case';
-// import { useAuthStore } from '@/composables/useAuthStore';
+import { BookedUser } from '@/models/booked/BookedUser';
+import { useAuthStore } from '@/composables/useAuthStore';
+import { useStatus } from '@/composables/useStatus';
 // import { useRouter } from '@/router/useRouter';
 
 export default defineComponent({
@@ -266,9 +266,14 @@ export default defineComponent({
     const valid = ref(false);
     const isPasswordVisible = ref(false);
     const { loading, withLoader } = useLoader();
-    const { artforms, step, orgTypes, formData, type, updateProgress, progress, typeSelected, isForOrganisation, goToStep, emailExists, next, organisation } =
+    const { artforms, step, accountType, formData, type, updateProgress, progress, typeSelected, isForOrganisation, goToStep, emailExists, next, organisation } =
       useRegistrationData();
-    const { post } = useApi();
+    
+    const { setMessage } = useStatus();
+    const { user, refreshState } = useAuthStore();
+    const formDataSubmit = ref<BookedUser>({} as BookedUser);
+    const { post, put } = useApi();
+
     // const { router } = useRouter();
     const checkIfEmailExists = async () =>
       withLoader(async () => {
@@ -280,53 +285,85 @@ export default defineComponent({
         await post('/users', snakeKeys(formData));
       });
     };
+    const updateUser = async () => {
+      withLoader(async () => {
+        let uuid= user?.value?.data?.uuid ?? '';
+        const response = await put(`/users/${uuid}`, snakeKeys(formData));
+
+        console.log(response, 'response');
+      });
+    };
     const checkTypeOfOrganization = async () => {
-      if (formData.organisationType === 'ARTIST') {
+      if (formData.accountType === 'Artist') {
         goToStep(2);
         updateProgress(20);
-      } else if (formData.organisationType === 'ARTS_ORGS') {
+      } else if (formData.accountType === 'Arts_Organisation') {
         goToStep(3);
       } else {
         goToStep(4);
       }
     };
     const updateArtistFlow = async (step: number) => {
-      console.log(formData.organisationType, step, 'formData.organisationType');
-      if (formData.organisationType === 'ARTIST') {
+      if (formData.accountType === 'Artist') {
         goToStep(step);
         updateProgress(20);
-        console.log(step, 'step');
-        console.log(progress.value, 'progress');
       }
     };
 
     const checkRadio = async (value: string) => {
-      formData.organisationType = value;
-      console.log(formData.organisationType,step.value);
+      formData.accountType = value;
     };
     const checkRadioArtType = async (value: string) => {
       formData.artform = value;
-      console.log(formData.artform,step.value);
     };
     const checkRadioOrgType = async (value: string) => {
       formData.orgType = value;
-      console.log(formData.orgType,step.value);
     };
-    console.log(step.value,'step.value' );
-    console.log(progress.value,'progress');
+    // const updateUser = async () =>
+    //   withLoader(async () => {
+    //     const response = await user.value.updateUser(formDataSubmit.value);
+    //     await refreshState();
+    //     if (user.value.data.member) {
+    //       setMessage('Profile Updated. Redirecting to Dashboard...');
+    //       setTimeout(() => {
+    //         // router.push({ name: routeNames.dashboard });
+    //       }, 1000);
+    //     } else {
+    //       setMessage('Profile Updated.');
+    //     }
+    //   });
+    const getType = (value: string) => {
+      let data = accountType.filter((item) => {
+        return item.key === formData.accountType; // Assuming item.key is what you want to match
+      });
+      if (data.length > 0) {
+        if (value == 'rate') {
+          return data[0].rate;
+        }
+        if (value == 'saving') {
+          let saving = (100 * data[0].rate) / 66;
 
+          return Math.round(100 - saving);
+        }
+      }
+      return '';
+    };
+    // console.log(user.value.data.uuid, 'user');
     return {
       type,
       isForOrganisation,
       typeSelected,
       formData,
+      formDataSubmit,
       rules,
       valid,
-      orgTypes,
+      accountType,
       artforms,
+      getType,
       loading,
       emailExists,
       register,
+      updateUser,
       organisation,
       checkTypeOfOrganization,
       checkRadioArtType,
@@ -349,6 +386,26 @@ export default defineComponent({
 </script>
 
 <style>
+.image-container {
+  position: relative;
+  display: inline-block;
+  /* Make sure the container doesn't collapse */
+}
+
+.diamond {
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-bottom-color: your-diamond-color;
+  /* Replace with your desired color */
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-30px, -60px);
+  rotate: 5deg;
+  /* Center the diamond */
+}
+
 /* desktop screen */
 @media only screen and (min-width: 1025px) {
   .custom-text-field .v-input__slot {
@@ -462,7 +519,7 @@ export default defineComponent({
 
   .tab-title {
     font-family: 'Roboto-Medium' !important;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 900;
     line-height: 42px;
     letter-spacing: 0em;
@@ -475,7 +532,9 @@ export default defineComponent({
     font-weight: 900;
     line-height: 35.16px;
     letter-spacing: 0em;
-    padding: 10px 30px !important;
+    padding: 6px 30px !important;
+    color: #231F20 !important;
+    text-decoration: none !important;
   }
 
   .progress-bar {
@@ -487,6 +546,11 @@ export default defineComponent({
 
 /* Mobile screen */
 @media only screen and (max-width: 1024px) {
+
+  .description-m {
+    margin-bottom: 10px !important;
+  }
+
   .custom-text-field .v-input__slot {
     border-radius: 0px !important;
     border: 1px solid #231F20 !important;
@@ -613,7 +677,9 @@ export default defineComponent({
     line-height: 42px;
     letter-spacing: 0em;
     text-align: left;
-    padding: 10px 30px !important;
+    padding: 6px 30px !important;
+    color: #231F20 !important;
+    text-decoration: none !important;
   }
 
   .progress-bar {

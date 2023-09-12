@@ -1,21 +1,17 @@
 <template>
   <v-form v-model="valid">
-    <v-text-field outlined dense label="Email Address" v-model="formData.email" :error-messages="errors.email" />
-    <v-text-field
-      v-model="formData.password"
-      dense
-      outlined
-      :type="isPasswordVisible ? 'text' : 'password'"
-      label="Password"
-      :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
-      :error-messages="errors.password"
-      @click:append="isPasswordVisible = !isPasswordVisible"
-      hide-details="auto"
-    ></v-text-field>
-    <div class="text-right">
+    <div class="sub-title-normal pb-2"><span class="sub-title">Email Address</span> </div>
+    <v-text-field outlined dense label="" class="custom-text-field" v-model="formData.email"
+      :error-messages="errors.email" />
+    <div class="sub-title-normal pb-2"><span class="sub-title">Password</span> </div>
+    <v-text-field v-model="formData.password" dense outlined :type="isPasswordVisible ? 'text' : 'password'"
+      class="custom-text-field" label="" :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+      :error-messages="errors.password" @click:append="isPasswordVisible = !isPasswordVisible"
+      hide-details="auto"></v-text-field>
+    <div class="text-right pt-3 pb-3 sub-title-normal">
       <router-link :to="{ name: routeNames.auth.forgot }">Forgot Password</router-link>
     </div>
-    <div class="d-flex justify-center">
+    <div class="d-flex justify-center pt-2">
       <base-button black class="my-4" @click="login" :loading="loading">Login</base-button>
     </div>
   </v-form>

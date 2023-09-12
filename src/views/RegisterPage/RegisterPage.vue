@@ -1,7 +1,7 @@
 <template>
-  <member-page title="Register">
+  <subscription-page title="Register">
     <register-form />
-  </member-page>
+  </subscription-page>
 </template>
 
 <script lang="ts">
@@ -11,10 +11,10 @@ import RegisterText from './components/RegisterText.vue';
 import RegisterForm from './components/RegisterForm.vue';
 import PaymentForm from './components/PaymentForm.vue';
 import { useRegistrationData } from '@/composables/useRegistrationData';
-import MemberPage from '@/layouts/MemberLayout/MemberPage.vue';
+import SubscriptionPage from '@/layouts/SubscriptionLayout/SubscriptionPage.vue';
 
 export default defineComponent({
-  components: { RegisterText, BaseButton, RegisterForm, PaymentForm, MemberPage },
+  components: { RegisterText, BaseButton, RegisterForm, PaymentForm, SubscriptionPage },
   name: 'RegisterPage',
   setup() {
     const { step } = useRegistrationData();
