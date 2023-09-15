@@ -16,47 +16,24 @@
               <div class="subtitle-1 mb-2">Organisation Details</div>
 
               <!-- Org Name -->
-              <v-text-field
-                v-model="formData.organisationName"
-                dense
-                outlined
-                label="Organisation Name (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.organisationName" dense outlined label="Organisation Name (required)"
+                :rules="[rules.required]" />
 
               <!-- Org Type -->
-              <v-select
-                v-model="formData.organisationType"
-                :items="orgTypes"
-                dense
-                outlined
-                label="Organisation Type (required)"
-                :rules="[rules.required]"
-              />
+              <v-select v-model="formData.organisationType" :items="orgTypes" dense outlined
+                label="Organisation Type (required)" :rules="[rules.required]" />
 
               <!-- Org ABN -->
-              <v-text-field
-                v-model="formData.organisationAbn"
-                dense
-                outlined
-                label="Organisation ABN (required)"
-                :rules="[rules.required]"
-                type="number"
-              />
+              <v-text-field v-model="formData.organisationAbn" dense outlined label="Organisation ABN (required)"
+                :rules="[rules.required]" type="number" />
             </div>
           </v-expand-transition>
           <div>
             <div class="subtitle-1 mb-2">Contact Details</div>
 
             <!-- Email -->
-            <v-text-field
-              v-model="formData.email"
-              dense
-              outlined
-              label="Email (required)"
-              :rules="[rules.required]"
-              :loading="loading"
-            />
+            <v-text-field v-model="formData.email" dense outlined label="Email (required)" :rules="[rules.required]"
+              :loading="loading" />
           </div>
 
           <div v-if="emailExists && formData.email">
@@ -69,82 +46,37 @@
           <div v-if="!emailExists && formData.email">
             <div>
               <!-- First Name -->
-              <v-text-field
-                v-model="formData.firstName"
-                dense
-                outlined
-                label="First Name (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.firstName" dense outlined label="First Name (required)"
+                :rules="[rules.required]" />
 
               <!-- Last Name -->
-              <v-text-field
-                v-model="formData.lastName"
-                dense
-                outlined
-                label="Last Name (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.lastName" dense outlined label="Last Name (required)"
+                :rules="[rules.required]" />
 
               <!-- Address -->
-              <v-text-field
-                v-model="formData.address"
-                dense
-                outlined
-                label="Address (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.address" dense outlined label="Address (required)"
+                :rules="[rules.required]" />
 
               <!-- Suburb -->
-              <v-text-field
-                v-model="formData.suburb"
-                dense
-                outlined
-                label="Suburb (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.suburb" dense outlined label="Suburb (required)"
+                :rules="[rules.required]" />
 
               <!-- State -->
-              <v-text-field
-                v-model="formData.state"
-                dense
-                outlined
-                label="State (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.state" dense outlined label="State (required)" :rules="[rules.required]" />
 
               <!-- Country -->
-              <v-text-field
-                v-model="formData.country"
-                dense
-                outlined
-                label="Country (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.country" dense outlined label="Country (required)"
+                :rules="[rules.required]" />
 
               <!-- Postcode -->
-              <v-text-field
-                v-model="formData.postcode"
-                dense
-                outlined
-                label="Postcode (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.postcode" dense outlined label="Postcode (required)"
+                :rules="[rules.required]" />
 
               <!-- Mobile -->
-              <v-text-field
-                v-model="formData.phone"
-                dense
-                outlined
-                label="Mobile (required)"
-                :rules="[rules.required]"
-              />
+              <v-text-field v-model="formData.phone" dense outlined label="Mobile (required)" :rules="[rules.required]" />
 
-              <v-radio-group
-                v-model="formData.insurance"
-                label="Do you have Public Liability Insurance?"
-                :rules="[rules.inArray(['Yes', 'No'])]"
-              >
+              <v-radio-group v-model="formData.insurance" label="Do you have Public Liability Insurance?"
+                :rules="[rules.inArray(['Yes', 'No'])]">
                 <v-radio value="Yes" label="Yes" />
                 <v-radio value="No" label="No" />
               </v-radio-group>
@@ -153,27 +85,15 @@
               <div class="subtitle-1 mb-2">Artform Details</div>
 
               <!-- Artfrom -->
-              <v-select
-                v-model="formData.artform"
-                :items="artforms"
-                dense
-                outlined
-                label="Primary Artform (required)"
-                :rules="[rules.required]"
-              />
+              <v-select v-model="formData.artform" :items="artforms" dense outlined label="Primary Artform (required)"
+                :rules="[rules.required]" />
             </div>
             <div>
               <div class="subtitle-1 mb-2">Password</div>
-              <v-text-field
-                v-model="formData.password"
-                dense
-                outlined
-                :type="isPasswordVisible ? 'text' : 'password'"
-                label="Password"
-                :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+              <v-text-field v-model="formData.password" dense outlined :type="isPasswordVisible ? 'text' : 'password'"
+                label="Password" :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
                 @click:append="isPasswordVisible = !isPasswordVisible"
-                :rules="[rules.required, rules.minLength(8)]"
-              ></v-text-field>
+                :rules="[rules.required, rules.minLength(8)]"></v-text-field>
             </div>
             <div>
               <v-checkbox v-model="formData.tcs" :rules="[rules.required]" label="">
@@ -187,10 +107,8 @@
                   </p>
                 </template>
               </v-checkbox>
-              <v-checkbox
-                v-model="formData.updates"
-                label="Yes, keep me up to date with Brand X news, events and promotions."
-              />
+              <v-checkbox v-model="formData.updates"
+                label="Yes, keep me up to date with Brand X news, events and promotions." />
             </div>
             <div class="d-flex justify-center">
               <base-button black :disabled="!valid" @click="register" :loading="loading">Register</base-button>
@@ -251,7 +169,7 @@ export default defineComponent({
         if (user) {
           const { storeLogin } = useAuthStore();
 
-          storeLogin(user);
+          await storeLogin(user);
 
           router.push({ name: routeNames.profile.billing });
         }

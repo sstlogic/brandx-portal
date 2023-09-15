@@ -1,13 +1,17 @@
 <template>
   <v-form v-model="valid">
     <div class="sub-title-normal pb-2"><span class="sub-title">Email Address</span> </div>
-    <v-text-field outlined dense label="" class="custom-text-field" v-model="formData.email"
-      :error-messages="errors.email" />
+    <div class="text-input-sub">
+      <v-text-field outlined dense label="" class="custom-text-field" v-model="formData.email"
+        :error-messages="errors.email" />
+    </div>
     <div class="sub-title-normal pb-2"><span class="sub-title">Password</span> </div>
-    <v-text-field v-model="formData.password" dense outlined :type="isPasswordVisible ? 'text' : 'password'"
-      class="custom-text-field" label="" :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
-      :error-messages="errors.password" @click:append="isPasswordVisible = !isPasswordVisible"
-      hide-details="auto"></v-text-field>
+    <div class="text-input-sub">
+      <v-text-field v-model="formData.password" dense outlined :type="isPasswordVisible ? 'text' : 'password'"
+        class="custom-text-field" label="" :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+        :error-messages="errors.password" @click:append="isPasswordVisible = !isPasswordVisible"
+        hide-details="auto"></v-text-field>
+    </div>
     <div class="text-right pt-3 pb-3 sub-title-normal">
       <router-link :to="{ name: routeNames.auth.forgot }">Forgot Password</router-link>
     </div>
@@ -54,7 +58,7 @@ export default defineComponent({
         if (user) {
           const { storeLogin } = useAuthStore();
 
-          storeLogin(user);
+          await storeLogin(user);
 
           if (user.data.member) {
             router.push({ name: routeNames.dashboard });

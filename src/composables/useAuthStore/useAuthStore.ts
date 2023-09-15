@@ -25,7 +25,7 @@ export const useAuthStore = () => {
     const localUser = getLocalAuth();
 
     if (localUser?.user) {
-      storeLogin(new User(localUser.user?.data));
+      await storeLogin(new User(localUser.user?.data));
     } else {
       await retryAuth();
     }
@@ -34,7 +34,7 @@ export const useAuthStore = () => {
   const retryAuth = async (): Promise<void> => {
     try {
       const user = await User.getCurrentUser();
-      return storeLogin(user);
+      return await storeLogin(user);
     } catch (e) {
       return clearLocalAuth();
     }
@@ -42,7 +42,7 @@ export const useAuthStore = () => {
 
   const refreshState = async (): Promise<void> => retryAuth();
 
-  const storeLogin = (user: User): void => {
+  const storeLogin = async (user: User): Promise<void> => {
     state.user = user;
     setLocalAuth(state);
   };

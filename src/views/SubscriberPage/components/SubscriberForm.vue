@@ -2,17 +2,18 @@
   <div>
     <!-- 1.002 Subscriber Type -->
     <div class="w-full px-4" v-if="step == 1">
-      <div class="tab-title pt-8 pb-md-2 py-sm-4">
-        Hi Sam! 👋
+      <div class="tab-title pt-8 pt-sm-4 padding-21">
+        Hi {{formData.firstName}}! 👋
+        <br /> Which best describes you?
         <!-- <div class="pt-md-3 pt-sm-5">Which of these options best describes you?</div> -->
-        <div class="pt-md-3 pt-sm-5">Which best describes you?</div>
+        <!-- <div class="pt-md-3 pt-sm-5"></div> -->
       </div>
-      <div class="sub-title-normal pb-2">
+      <div class="sub-title-normal padding-21">
         Please select the choice that best describes your usage at Brand X so that we can tailor your experience.
       </div>
       <v-form v-model="valid">
         <div>
-          <div>
+          <div class="padding-21">
             <v-radio-group v-model="formData.accountType" column :rules="[rules.required]">
               <div class="" v-for="(orgType, index) in accountType" :key="index">
                 <div :class="{
@@ -27,10 +28,12 @@
               </div>
             </v-radio-group>
           </div>
-          <v-sheet height="30px" />
-          <div class="sub-title-normal"><span class="sub-title">None of the above?</span> Get in touch</div>
-          <v-sheet height="50px" />
-          <div class="d-flex justify-end pt-2">
+          <!-- <v-sheet height="30px" /> -->
+          <div class="sub-title-normal padding-21">
+            <span class="sub-title">None of the above? </span>
+            <a href="mailto:info@brandx.org.au">Get in touch</a>
+          </div>
+          <div class="d-flex justify-end">
             <base-button black :disabled="!valid" @click="checkTypeOfOrganization"
               :loading="loading">Continue</base-button>
           </div>
@@ -70,31 +73,39 @@
     </div>
     <!-- 1.005 Contact Info -->
     <div class="w-full px-4" v-if="step == 5">
-      <div class="tab-title pt-4">Where can we contact you?</div>
-      <div class="sub-title-normal pt-md-4 pb-md-2 py-sm-5">For billing and under the rare occasion that we may need to
+      <div class="tab-title pt-4 padding-21">Where can we contact you?</div>
+      <div class="sub-title-normal padding-32">For billing and under the rare occasion that we may need to
         contact you.
       </div>
-      <v-form v-model="valid" class="pt-4">
+      <v-form v-model="valid" class="">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Mobile phone number</span> (required)</div>
-          <v-text-field v-model="formData.phone" dense class="custom-text-field" outlined label=""
-            :rules="[rules.required]" />
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.phone" dense class="custom-text-field" outlined label=""
+              :rules="[rules.required]" />
+          </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Street Address</span> (required)</div>
-          <v-text-field v-model="formData.address" dense outlined label="" class="custom-text-field"
-            :rules="[rules.required]" />
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.address" dense outlined label="" class="custom-text-field"
+              :rules="[rules.required]" />
+          </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Suburb</span> (required)</div>
-          <v-text-field v-model="formData.suburb" dense class="custom-text-field" outlined label=""
-            :rules="[rules.required]" />
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.suburb" dense class="custom-text-field" outlined label=""
+              :rules="[rules.required]" />
+          </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Country</span> (required)</div>
-          <v-text-field v-model="formData.country" dense outlined label="" class="custom-text-field"
-            :rules="[rules.required]" />
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.country" dense outlined label="" class="custom-text-field"
+              :rules="[rules.required]" />
+          </div>
           <div class="d-flex">
-            <div class="mr-4 w-full">
+            <div class="mr-4 w-full text-input-sub">
               <div class="sub-title-normal pb-2"><span class="sub-title">State</span> (required)</div>
               <v-text-field v-model="formData.state" dense outlined label="" class="custom-text-field"
                 :rules="[rules.required]" />
             </div>
-            <div class="ml-4 w-full">
+            <div class="ml-4 w-full text-input-sub">
               <div class="sub-title-normal pb-2"><span class="sub-title">Postcode</span> (required)</div>
               <v-text-field v-model="formData.postcode" dense outlined label="" class="custom-text-field"
                 :rules="[rules.required]" />
@@ -120,22 +131,22 @@
     </div>
     <!-- 1.006 Online Info -->
     <div class="w-full px-4" v-if="step == 6">
-      <div class="tab-title py-4">Where can we find you online?</div>
-      <div class="pt-2 sub-title-normal">
+      <div class="tab-title pt-4 padding-21">Where can we find you online?</div>
+      <div class="sub-title-normal padding-32">
         Getting to know our community helps us to connect artists and opportunities. If you are comfortable please share
         your online details.
       </div>
-      <v-form v-model="valid" class="pt-7">
+      <v-form v-model="valid" class="">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Website URL</span> (optional)</div>
           <v-text-field v-model="formData.website" dense class="custom-text-field" outlined />
-          <div class="tab-title py-7">Would you like to hear from us from time to time?</div>
-          <div class="sub-title-normal">
+          <div class="tab-title pt-7 padding-21">Would you like to hear from us from time to time?</div>
+          <div class="sub-title-normal padding-21">
             By subscribing to the Brand X newsletter you’ll stay up to date with the latest programs,
             shows and residency information that we have to offer.
           </div>
-          <div class="pt-4 sub-title-normal">Be the first to know and subscribe to our newsletter.</div>
-          <div class="w-full pt-3">
+          <div class="sub-title-normal padding-21">Be the first to know and subscribe to our newsletter.</div>
+          <div class="w-full">
             <v-radio-group row v-model="formData.hear_from_us" :rules="[rules.inArray(['Yes', 'No'])]">
               <v-radio value="Yes" color="black" :ripple="false" />
               <label class="mr-3 sub-title-normal">Yaaaas please!</label>
@@ -145,7 +156,9 @@
           </div>
         </div>
         <div class="d-flex justify-end pt-5">
-          <div class="pr-4 pt-3 text-decoration-underline sub-title-normal">skip this question</div>
+          <div class="pr-4 pt-3 text-decoration-underline sub-title-normal" @click="updateArtistFlow(7)">
+            skip this question
+          </div>
           <base-button black :disabled="!valid" @click="updateArtistFlow(7)" :loading="loading">Continue</base-button>
         </div>
       </v-form>
@@ -181,7 +194,9 @@
         <div class="mr-3 px-2 py-2">
           <router-link :to="{ name: routeNames.home }" class="rect-btn">No thanks</router-link>
         </div>
-        <base-button black @click="updateArtistFlow(7)">Yes please</base-button>
+        <router-link :to="{ name: routeNames.profile.billing }">
+          <base-button black>Yes please</base-button>
+        </router-link>
       </div>
     </div>
     <div class="w-full px-4" v-if="step == 3">
@@ -230,8 +245,8 @@
           </div>
         </div>
         <div class="d-flex justify-end pt-5">
-          <!-- <base-button black :disabled="!valid" @click="updateArtistFlow(6)" :loading="loading">Continue</base-button> -->
-          <base-button black :disabled="!valid" @click="updateUser()" :loading="loading">Continue</base-button>
+          <base-button black :disabled="!valid" @click="updateUser('organisation')"
+            :loading="loading">Continue</base-button>
         </div>
         <v-sheet height="30px" />
       </v-form>
@@ -257,7 +272,7 @@ import { snakeKeys } from '@/utils/case';
 import { BookedUser } from '@/models/booked/BookedUser';
 import { useAuthStore } from '@/composables/useAuthStore';
 import { useStatus } from '@/composables/useStatus';
-// import { useRouter } from '@/router/useRouter';
+import { useRouter } from '@/router/useRouter';
 
 export default defineComponent({
   components: { SubscriberText, BaseButton },
@@ -274,7 +289,7 @@ export default defineComponent({
     const formDataSubmit = ref<BookedUser>({} as BookedUser);
     const { post, put } = useApi();
 
-    // const { router } = useRouter();
+    const { router } = useRouter();
     const checkIfEmailExists = async () =>
       withLoader(async () => {
         emailExists.value = await User.existsByEmail(formData.email);
@@ -285,12 +300,21 @@ export default defineComponent({
         await post('/users', snakeKeys(formData));
       });
     };
-    const updateUser = async () => {
+    const updateUser = async (type: string) => {
       withLoader(async () => {
-        let uuid= user?.value?.data?.uuid ?? '';
+        let uuid = user?.value?.data?.uuid ?? '';
         const response = await put(`/users/${uuid}`, snakeKeys(formData));
-
         console.log(response, 'response');
+        if (response === undefined) {
+          return false;
+        }
+        if (response !== undefined && type == 'organisation') {
+          goToStep(7);
+          // setMessage('Profile Updated. Redirecting to Dashboard...');
+          // setTimeout(() => {
+          //   router.push({ name: routeNames.profile.billing });
+          // }, 1000);
+        } 
       });
     };
     const checkTypeOfOrganization = async () => {
@@ -305,6 +329,7 @@ export default defineComponent({
     };
     const updateArtistFlow = async (step: number) => {
       if (formData.accountType === 'Artist') {
+        await updateUser('artist');
         goToStep(step);
         updateProgress(20);
       }
@@ -319,19 +344,6 @@ export default defineComponent({
     const checkRadioOrgType = async (value: string) => {
       formData.orgType = value;
     };
-    // const updateUser = async () =>
-    //   withLoader(async () => {
-    //     const response = await user.value.updateUser(formDataSubmit.value);
-    //     await refreshState();
-    //     if (user.value.data.member) {
-    //       setMessage('Profile Updated. Redirecting to Dashboard...');
-    //       setTimeout(() => {
-    //         // router.push({ name: routeNames.dashboard });
-    //       }, 1000);
-    //     } else {
-    //       setMessage('Profile Updated.');
-    //     }
-    //   });
     const getType = (value: string) => {
       let data = accountType.filter((item) => {
         return item.key === formData.accountType; // Assuming item.key is what you want to match
@@ -406,8 +418,26 @@ export default defineComponent({
   /* Center the diamond */
 }
 
+.padding-21 {
+  padding-bottom: 21px;
+}
+
+.padding-42 {
+  padding-bottom: 42px;
+}
+
+.padding-32 {
+  padding-bottom: 32px;
+}
+
 /* desktop screen */
 @media only screen and (min-width: 1025px) {
+
+
+  .text-input-sub .theme--light.v-input {
+    max-height: 60px;
+  }
+
   .custom-text-field .v-input__slot {
     border-radius: 0px !important;
     border: 1px solid #231F20 !important;
@@ -419,9 +449,9 @@ export default defineComponent({
   }
 
   .custom-text-field .v-text-field__slot {
-    min-height: 50px !important;
+    min-height: 40px !important;
     font-family: 'Roboto-Regular' !important;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
     line-height: 28px;
     letter-spacing: 0em;
@@ -546,6 +576,9 @@ export default defineComponent({
 
 /* Mobile screen */
 @media only screen and (max-width: 1024px) {
+  .text-input-sub .theme--light.v-input {
+    max-height: 75px;
+  }
 
   .description-m {
     margin-bottom: 10px !important;

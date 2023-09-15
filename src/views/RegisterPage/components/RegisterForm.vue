@@ -1,21 +1,28 @@
 <template>
   <div class=" px-4">
-    <div class="tab-title pt-4">Create a Brand X Account</div>
-    <div class="sub-title-normal py-sm-4">To book a space or sign up for Artist Pass Access first make an account.</div>
-    <div class="pt-3">
+    <div class="tab-title pt-4 padding-21">Create a Brand X Account</div>
+    <div class="sub-title-normal padding-32">To book a space or sign up for Artist Pass Access first make an account.
+    </div>
+    <div class="pt-2">
       <v-form v-model="valid">
         <v-expand-transition>
           <div>
             <div>
               <div class="sub-title-normal pb-2"><span class="sub-title">First name:</span> (required)</div>
-              <v-text-field v-model="formData.firstName" dense class="custom-text-field" outlined label=""
-                :rules="[rules.required]" />
+              <div class="text-input-sub">
+                <v-text-field v-model="formData.firstName" dense class="custom-text-field " outlined label=""
+                  :rules="[rules.required]" />
+              </div>
               <div class="sub-title-normal pb-2"><span class="sub-title">Last name:</span> (required)</div>
-              <v-text-field v-model="formData.lastName" dense outlined label="" class="custom-text-field"
-                :rules="[rules.required]" />
+              <div class="text-input-sub">
+                <v-text-field v-model="formData.lastName" dense outlined label="" class="custom-text-field"
+                  :rules="[rules.required]" />
+              </div>
               <div class="sub-title-normal pb-2"><span class="sub-title">Email:</span> (required)</div>
-              <v-text-field v-model="formData.email" dense outlined class="custom-text-field"
-                :error-messages="errors.email" :rules="[rules.required]" :loading="loading" />
+              <div class="text-input-sub">
+                <v-text-field v-model="formData.email" dense outlined class="custom-text-field"
+                  :error-messages="errors.email" :rules="[rules.required]" :loading="loading" />
+              </div>
               <div v-if="emailExists && formData.email">
                 <p>
                   Your email address is already registered. To proceed with subscribing, please
@@ -23,11 +30,13 @@
                 </p>
               </div>
               <div class="sub-title-normal pb-2"><span class="sub-title">Password:</span> (required)</div>
-              <v-text-field v-model="formData.password" dense outlined class="custom-text-field"
-                :type="isPasswordVisible ? 'text' : 'password'" label=""
-                :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
-                @click:append="isPasswordVisible = !isPasswordVisible"
-                :rules="[rules.required, rules.minLength(8)]"></v-text-field>
+              <div class="text-input-sub">
+                <v-text-field v-model="formData.password" dense outlined class="custom-text-field"
+                  :type="isPasswordVisible ? 'text' : 'password'" label=""
+                  :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+                  @click:append="isPasswordVisible = !isPasswordVisible"
+                  :rules="[rules.required, rules.minLength(8)]"></v-text-field>
+              </div>
             </div>
             <div class="d-flex">
               <v-checkbox v-model="formData.tcs" color="secondary" hide-details :rules="[rules.required]" label="">
@@ -95,8 +104,9 @@ export default defineComponent({
         const response = await post('/users', snakeKeys(formData)).catch((errors) => mapErrors(errors));
         console.log(response, 'response');
         if (response !== undefined) {
+          
           await login(formData.email, formData.password);
-          router.push({ name: routeNames.subscriber });
+          // router.push({ name: routeNames.subscriber });
         }
       });
     };
@@ -108,8 +118,12 @@ export default defineComponent({
         if (user) {
           const { storeLogin } = useAuthStore();
 
-          storeLogin(user);
-          // router.push({ name: routeNames.subscriber });
+          await storeLogin(user);
+          
+          setTimeout(() => {
+            router.push({ name: routeNames.subscriber });
+          }, 1000);
+          
           // router.push({ name: routeNames.profile.billing });
         }
       });
@@ -150,14 +164,24 @@ export default defineComponent({
   padding-top: 0px !important;
 }
 
+.padding-21 {
+  padding-bottom: 21px;
+}
+
+.padding-42 {
+  padding-bottom: 42px;
+}
+
+.padding-32 {
+  padding-bottom: 32px;
+}
+
 @media only screen and (min-width: 1025px) {
-  /* .v-text-field {
-    padding-top: -30px !important;
-    margin-top: -30px !important;
-  } */
 
   /* Your CSS styles for desktop screens go here */
-
+  .text-input-sub .theme--light.v-input {
+    max-height: 60px;
+  }
 
   .custom-text-field .v-input__slot {
     border-radius: 0px !important;
@@ -213,6 +237,9 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 1024px) {
+  .text-input-sub .theme--light.v-input {
+    max-height: 75px;
+  }
 
   /* Your CSS styles for all mobile devices, including tablets, go here */
   .custom-text-field .v-input__slot {

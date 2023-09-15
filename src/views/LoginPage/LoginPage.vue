@@ -1,8 +1,8 @@
 <template>
   <subscription-page title="Your Artist Pass" heading="Artist Pass Login">
     <div class="mt-5 mb-5 px-5 row">
-      <div class="col-md-12 col-sm-12 sub-title-normal">
-        <div class="tab-title pb-1">Artist Pass Login</div>
+      <div class="col-md-12 col-sm-12 sub-title-normal ">
+        <div class="tab-title padding-21">Artist Pass Login</div>
         An Artist Pass is required to book a space with Brand X.<br />
         <div class="pt-1">
           Don't have one? <router-link :to="{ name: routeNames.auth.register }"> Subscribe here </router-link>
@@ -33,9 +33,26 @@ export default defineComponent({
 </script>
 
 <style>
+.padding-21 {
+  padding-bottom: 21px;
+}
+
+.padding-42 {
+  padding-bottom: 42px;
+}
+
+.padding-32 {
+  padding-bottom: 32px;
+}
+
 @media only screen and (min-width: 1025px) {
 
   /* Your CSS styles for desktop screens go here */
+
+  .text-input-sub .theme--light.v-input {
+    max-height: 60px;
+  }
+
   .custom-text-field .v-input__slot {
     border-radius: 0px !important;
     border: 1px solid #231F20 !important;
@@ -83,6 +100,11 @@ export default defineComponent({
 @media only screen and (max-width: 1024px) {
 
   /* Your CSS styles for all mobile devices, including tablets, go here */
+
+  .text-input-sub .theme--light.v-input {
+    max-height: 75px;
+  }
+
   .custom-text-field .v-input__slot {
     border-radius: 0px !important;
     border: 1px solid #231F20 !important;
