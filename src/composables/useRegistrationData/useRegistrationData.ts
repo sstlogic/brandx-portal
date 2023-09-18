@@ -15,7 +15,7 @@ const artforms = ref([
   'Other',
 ]);
 
-const orgTypes = ['Sole Trader', 'Not For Profit entity', 'For Profit entity', 'Partnership', 'Trust'];
+const orgTypes = ['Government', 'Not For Profit', 'For Profit'];
 const accountType = [
   { key: 'Artist', label: 'I am an individual artist', rate: 24.0 },
   { key: 'Arts_Organisation', label: 'We are an arts organization', rate: 33.0 },
@@ -23,8 +23,7 @@ const accountType = [
 ];
 
 const organisation = ['Government', 'Not For Profit', 'For Profit'];
-
-const formData = reactive({
+const userDefaultData = {
   organisationName: '',
   organisationAbn: '',
   orgType: '',
@@ -41,14 +40,16 @@ const formData = reactive({
   postcode: '',
   phone: '',
   artform: '',
-  tcs: '',
+  tcs: false,
   updates: false,
-  insurance: '',
-  accurate: '',
+  insurance: 'No',
   password: '',
+
+  accurate: '',
   website: '',
   hear_from_us: '',
-});
+};
+let formData = reactive(userDefaultData);
 
 const type = ref<'individual' | 'organisation' | null>('individual');
 const typeSelected = computed(() => !!type.value);
@@ -62,6 +63,10 @@ const prev = () => step.value--;
 const goToStep = (value: number) => (step.value = value);
 
 const progress = ref(0);
+
+const reset = () => {
+  formData = reactive(userDefaultData);
+};
 
 const updateProgress = (value: number) => {
   if (progress.value === 100) return;
@@ -94,5 +99,6 @@ export const useRegistrationData = () => {
     progress,
     organisation,
     updateProgress,
+    reset,
   };
 };

@@ -9,7 +9,9 @@
         <p class="font-weight-bold">
           Below is a "view only" calendar where you can only check availability. To book a space with Brand X, you will
           need
-          <router-link to="/register">Artist Pass</router-link>
+
+          <router-link v-if="!isAuthed" to="/register">Artist Pass</router-link>
+          <router-link v-if="isAuthed" to="/subscriber">Artist Pass</router-link>
           subscription.
         </p>
       </div>
@@ -23,9 +25,8 @@
     <div class="mb-4">
       <p>
         Please refer to the Artist Pass
-        <a href="https://www.brandx.org.au/artist-pass-terms-and-conditions" @click.stop target="_blank"
-          >terms and conditions</a
-        >
+        <a href="https://www.brandx.org.au/artist-pass-terms-and-conditions" @click.stop target="_blank">terms and
+          conditions</a>
       </p>
     </div>
 

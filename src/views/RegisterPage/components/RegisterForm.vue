@@ -3,6 +3,14 @@
     <div class="tab-title pt-4 padding-21">Create a Brand X Account</div>
     <div class="sub-title-normal padding-32">To book a space or sign up for Artist Pass Access first make an account.
     </div>
+    <div v-if="emailExists && formData.email">
+      <div class="d-flex alert-bg">
+        <v-img :src="require('@/assets/svg/alert-warning.svg')" height="100%" max-height="49px" width="42px" />
+        <div class="px-4"> Your email address is already registered. To proceed with subscribing, please
+          <router-link :to="{ name: routeNames.auth.login }" class="alert-link">login to renew.</router-link>
+        </div>
+      </div>
+    </div>
     <div class="pt-2">
       <v-form v-model="valid">
         <v-expand-transition>
@@ -11,24 +19,19 @@
               <div class="sub-title-normal pb-2"><span class="sub-title">First name:</span> (required)</div>
               <div class="text-input-sub">
                 <v-text-field v-model="formData.firstName" dense class="custom-text-field " outlined label=""
-                  :rules="[rules.required]" />
+                  name="firstName" :rules="[rules.required]" />
               </div>
               <div class="sub-title-normal pb-2"><span class="sub-title">Last name:</span> (required)</div>
               <div class="text-input-sub">
                 <v-text-field v-model="formData.lastName" dense outlined label="" class="custom-text-field"
-                  :rules="[rules.required]" />
+                  :rules="[rules.required]" name="lastName" />
               </div>
               <div class="sub-title-normal pb-2"><span class="sub-title">Email:</span> (required)</div>
               <div class="text-input-sub">
-                <v-text-field v-model="formData.email" dense outlined class="custom-text-field"
+                <v-text-field v-model="formData.email" dense outlined class="custom-text-field" type="email"
                   :error-messages="errors.email" :rules="[rules.required]" :loading="loading" />
               </div>
-              <div v-if="emailExists && formData.email">
-                <p>
-                  Your email address is already registered. To proceed with subscribing, please
-                  <router-link :to="{ name: routeNames.auth.login }">login to renew.</router-link>
-                </p>
-              </div>
+
               <div class="sub-title-normal pb-2"><span class="sub-title">Password:</span> (required)</div>
               <div class="text-input-sub">
                 <v-text-field v-model="formData.password" dense outlined class="custom-text-field"
@@ -39,15 +42,16 @@
               </div>
             </div>
             <div class="d-flex">
-              <v-checkbox v-model="formData.tcs" color="secondary" hide-details :rules="[rules.required]" label="">
+              <v-checkbox v-model="formData.tcs" name="tcs" id="tcs" color="secondary" hide-details
+                :rules="[rules.required]" label="">
               </v-checkbox>
-              <div class="sub-title-normal ">
+              <label class="sub-title-normal" for="tcs">
                 I agree to Brand X
                 <a href="https://www.brandx.org.au/artist-pass-terms-and-conditions" target="_blank" @click.stop>
                   terms and conditions
                 </a>
                 and understand that I may receive official notices from Brand X from time to time. (Required)
-              </div>
+              </label>
             </div>
             <div class="d-flex justify-end pt-10">
               <base-button black :disabled="!valid" @click="register" :loading="loading">Sign Up</base-button>
@@ -174,6 +178,15 @@ export default defineComponent({
 
 .padding-32 {
   padding-bottom: 32px;
+}
+
+.alert-bg {
+  background: rgba(244, 228, 76, 0.13);
+  padding: 10px;
+}
+
+.alert-link {
+  color: #000000 !important;
 }
 
 @media only screen and (min-width: 1025px) {

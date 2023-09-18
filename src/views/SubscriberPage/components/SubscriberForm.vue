@@ -5,8 +5,6 @@
       <div class="tab-title pt-8 pt-sm-4 padding-21">
         Hi {{formData.firstName}}! 👋
         <br /> Which best describes you?
-        <!-- <div class="pt-md-3 pt-sm-5">Which of these options best describes you?</div> -->
-        <!-- <div class="pt-md-3 pt-sm-5"></div> -->
       </div>
       <div class="sub-title-normal padding-21">
         Please select the choice that best describes your usage at Brand X so that we can tailor your experience.
@@ -81,33 +79,33 @@
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Mobile phone number</span> (required)</div>
           <div class="text-input-sub">
-            <v-text-field v-model="formData.phone" dense class="custom-text-field" outlined label=""
+            <v-text-field v-model="formData.phone" name="phone" dense class="custom-text-field" outlined label=""
               :rules="[rules.required]" />
           </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Street Address</span> (required)</div>
           <div class="text-input-sub">
-            <v-text-field v-model="formData.address" dense outlined label="" class="custom-text-field"
+            <v-text-field v-model="formData.address" name="address" dense outlined label="" class="custom-text-field"
               :rules="[rules.required]" />
           </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Suburb</span> (required)</div>
           <div class="text-input-sub">
-            <v-text-field v-model="formData.suburb" dense class="custom-text-field" outlined label=""
+            <v-text-field v-model="formData.suburb" name="suburb" dense class="custom-text-field" outlined label=""
               :rules="[rules.required]" />
           </div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Country</span> (required)</div>
           <div class="text-input-sub">
-            <v-text-field v-model="formData.country" dense outlined label="" class="custom-text-field"
+            <v-text-field v-model="formData.country" name="country" dense outlined label="" class="custom-text-field"
               :rules="[rules.required]" />
           </div>
           <div class="d-flex">
             <div class="mr-4 w-full text-input-sub">
               <div class="sub-title-normal pb-2"><span class="sub-title">State</span> (required)</div>
-              <v-text-field v-model="formData.state" dense outlined label="" class="custom-text-field"
+              <v-text-field v-model="formData.state" name="state" dense outlined label="" class="custom-text-field"
                 :rules="[rules.required]" />
             </div>
             <div class="ml-4 w-full text-input-sub">
               <div class="sub-title-normal pb-2"><span class="sub-title">Postcode</span> (required)</div>
-              <v-text-field v-model="formData.postcode" dense outlined label="" class="custom-text-field"
+              <v-text-field v-model="formData.postcode" name="postcode" dense outlined label="" class="custom-text-field"
                 :rules="[rules.required]" />
             </div>
           </div>
@@ -116,10 +114,10 @@
             </div>
             <div class="col-auto insurance-radio ">
               <v-radio-group row v-model="formData.accurate" :rules="[rules.inArray(['Yes', 'No'])]">
-                <v-radio value="Yes" color="black" :ripple="false" />
-                <label class="mr-3 text sub-title-normal">Yes</label>
-                <v-radio value="No" color="black" :ripple="false" />
-                <label class="sub-title-normal">No</label>
+                <v-radio value="Yes" id="ac_rd_yes" color="black" :ripple="false" />
+                <label class="mr-3 text sub-title-normal" for="ac_rd_yes">Yes</label>
+                <v-radio value="No" id="ac_rd_no" color="black" :ripple="false" />
+                <label class="sub-title-normal" for="ac_rd_no">No</label>
               </v-radio-group>
             </div>
           </div>
@@ -148,10 +146,10 @@
           <div class="sub-title-normal padding-21">Be the first to know and subscribe to our newsletter.</div>
           <div class="w-full">
             <v-radio-group row v-model="formData.hear_from_us" :rules="[rules.inArray(['Yes', 'No'])]">
-              <v-radio value="Yes" color="black" :ripple="false" />
-              <label class="mr-3 sub-title-normal">Yaaaas please!</label>
-              <v-radio value="No" color="black" :ripple="false" />
-              <label class="sub-title-normal">Not now thanks.</label>
+              <v-radio value="Yes" color="black" id="hear_yes" :ripple="false" />
+              <label class="mr-3 sub-title-normal" for="hear_yes">Yaaaas please!</label>
+              <v-radio value="No" color="black" id="hear_no" :ripple="false" />
+              <label class="sub-title-normal" for="hear_no">Not now thanks.</label>
             </v-radio-group>
           </div>
         </div>
@@ -205,24 +203,25 @@
       <v-form v-model="valid" class="pt-4">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation name</span> (required)</div>
-          <v-text-field v-model="formData.organisationName" dense class="custom-text-field" outlined label=""
-            :rules="[rules.required]" />
+          <v-text-field v-model="formData.organisationName" name="organisationName" dense class="custom-text-field"
+            outlined label="" :rules="[rules.required]" />
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation ABN</span> (required)</div>
-          <v-text-field v-model="formData.organisationAbn" dense outlined label="" class="custom-text-field"
-            :rules="[rules.required]" />
+          <v-text-field v-model="formData.organisationAbn" name="organisationAbn" dense outlined label=""
+            class="custom-text-field" :rules="[rules.required]" />
           <div class="sub-title-normal pb-2"><span class="sub-title">Your role in the organisation</span> (required)</div>
-          <v-text-field v-model="formData.roleInOrg" dense class="custom-text-field" outlined label=""
+          <v-text-field v-model="formData.roleInOrg" name="roleInOrg" dense class="custom-text-field" outlined label=""
             :rules="[rules.required]" />
           <div class="sub-title-normal pb-2">
             <span class="sub-title">Please choose your organisation type</span> (required)
           </div>
-          <v-radio-group v-model="formData.orgType" row :rules="[rules.required]">
-            <div class="d-flex px-2" v-for="(item, index) in organisation" :key="index">
+          <v-radio-group v-model="formData.organisationType" row :rules="[rules.required]">
+            <div class="d-flex px-2" v-for="(item, index) in orgTypes" :key="index">
               <div class="art-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
                       'art-radio': true,
-                      'art-radio-active': formData.orgType === item,
+                      'art-radio-active': formData.organisationType === item,
                 }">
-                <v-radio :value="item" :ripple="false" color="black" class="hidden-radio"> </v-radio>
+                <v-radio :value="item" :ripple="false" name="organisationType" color="black" class="hidden-radio">
+                </v-radio>
                 <label class="font-weight-bold" @click="checkRadioOrgType(item)">
                   {{ item }}
                 </label>
@@ -236,10 +235,10 @@
             </div>
             <div class="col-md-12 col-sm-12 insurance-radio">
               <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]">
-                <v-radio value="Yes" color="black" :ripple="false" />
-                <label class="mr-3 text sub-title-normal">Yes</label>
-                <v-radio value="No" color="black" :ripple="false" />
-                <label class="sub-title-normal">No</label>
+                <v-radio value="Yes" id="yes_rd" color="black" :ripple="false" />
+                <label class="mr-3 text sub-title-normal" for="yes_rd">Yes</label>
+                <v-radio value="No" id="no_rd" color="black" :ripple="false" />
+                <label class="sub-title-normal" for="no_rd">No</label>
               </v-radio-group>
             </div>
           </div>
@@ -262,7 +261,7 @@ import { defineComponent, ref } from '@/plugins/composition';
 import SubscriberText from './SubscriberText.vue';
 import { rules } from '@/composables/useValidation/validations';
 // import { debouncedWatch } from '@vueuse/core';
-import { User } from '@/models';
+// import { User } from '@/models';
 import { routeNames } from '@/router/routeNames';
 import { useLoader } from '@/composables/useLoader';
 import { useRegistrationData } from '@/composables/useRegistrationData';
@@ -281,20 +280,27 @@ export default defineComponent({
     const valid = ref(false);
     const isPasswordVisible = ref(false);
     const { loading, withLoader } = useLoader();
-    const { artforms, step, accountType, formData, type, updateProgress, progress, typeSelected, isForOrganisation, goToStep, emailExists, next, organisation } =
+    const { artforms, step, accountType, formData,reset, type, updateProgress, progress, typeSelected, isForOrganisation,orgTypes, goToStep, emailExists, next, organisation } =
       useRegistrationData();
     
     const { setMessage } = useStatus();
-    const { user, refreshState } = useAuthStore();
+    const { user, refreshState,isAuthed } = useAuthStore();
     const formDataSubmit = ref<BookedUser>({} as BookedUser);
     const { post, put } = useApi();
-
+    // console.log(user.value.data, 'user');
+    if (isAuthed) {
+      if (formData.firstName == '') {
+        formData.firstName = user?.value?.data?.firstName;
+      }
+      if (formData.lastName == '') {
+        formData.lastName = user?.value?.data?.lastName;
+      }
+      if (formData.email == '') {
+        formData.email = user?.value?.data?.email;
+      }
+    }
     const { router } = useRouter();
-    const checkIfEmailExists = async () =>
-      withLoader(async () => {
-        emailExists.value = await User.existsByEmail(formData.email);
-      });
-    // console.log(step.value)
+   
     const register = async () => {
       withLoader(async () => {
         await post('/users', snakeKeys(formData));
@@ -307,6 +313,9 @@ export default defineComponent({
         console.log(response, 'response');
         if (response === undefined) {
           return false;
+        }
+        if (response !== undefined && type == 'General_Public') {
+          router.push({ name: routeNames.profile.billing });
         }
         if (response !== undefined && type == 'organisation') {
           goToStep(7);
@@ -323,8 +332,9 @@ export default defineComponent({
         updateProgress(20);
       } else if (formData.accountType === 'Arts_Organisation') {
         goToStep(3);
-      } else {
-        goToStep(4);
+      } else if (formData.accountType === 'General_Public') {
+        console.log(formData.accountType, 'formData.accountType');
+        await updateUser('General_Public');
       }
     };
     const updateArtistFlow = async (step: number) => {
@@ -342,7 +352,7 @@ export default defineComponent({
       formData.artform = value;
     };
     const checkRadioOrgType = async (value: string) => {
-      formData.orgType = value;
+      formData.organisationType = value;
     };
     const getType = (value: string) => {
       let data = accountType.filter((item) => {
@@ -360,7 +370,7 @@ export default defineComponent({
       }
       return '';
     };
-    // console.log(user.value.data.uuid, 'user');
+
     return {
       type,
       isForOrganisation,
@@ -392,6 +402,7 @@ export default defineComponent({
       icons: {
         mdiEyeOutline,
       },
+      orgTypes,
     };
   },
 });

@@ -39,14 +39,6 @@ export const routes: Array<RouteConfig> = [
       layout: 'MemberLayout',
     },
   },
-  // {
-  //   path: '/home',
-  //   name: routeNames.home,
-  //   component: () => import('@/views/HomePage/HomePage.vue'),
-  //   meta: {
-  //     layout: 'MemberLayout',
-  //   },
-  // },
   {
     path: '/login',
     name: routeNames.auth.login,
@@ -69,6 +61,7 @@ export const routes: Array<RouteConfig> = [
     component: () => import('@/views/SubscriberPage/SubscriberPage.vue'),
     meta: {
       layout: 'SubscriptionLayout',
+      middleware: [auth],
     },
   },
   {
