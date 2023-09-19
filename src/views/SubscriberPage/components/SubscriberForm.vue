@@ -173,7 +173,9 @@
         </div>
         <div class="subsidise-title">Subsidised space hire</div>
         <div class="subsidise-description pt-2">
-          A subscription costs $20.00 and provides you with great benefits for the next 12-months.
+          A subscription costs {{ formData.accountType == "Artist" ? "$20.00": "$100.00" }} and provides you with great
+          benefits
+          for the next 12-months.
         </div>
         <div class="subsidise-description pt-5">
           Starting from ${{ getType('rate') }}.00 per hour {{ getType('saving') }}% saving off our standard rate at $66
@@ -190,11 +192,12 @@
       <div class="tab-title mt-2">Do you want an artist pass?</div>
       <div class="d-flex justify-end pt-5 mt-5">
         <div class="mr-3 px-2 py-2">
-          <router-link :to="{ name: routeNames.home }" class="rect-btn">No thanks</router-link>
+          <!-- <router-link :to="{ name: routeNames.home }" class="rect-btn">No thanks</router-link> -->
+          <div class="rect-btn" @click="noThankYou()">No thanks</div>
         </div>
-        <router-link :to="{ name: routeNames.profile.billing }">
-          <base-button black>Yes please</base-button>
-        </router-link>
+        <!-- <router-link :to="{ name: routeNames.profile.billing }"> -->
+        <base-button black @click="goAheadToBilling()">Yes please</base-button>
+        <!-- </router-link> -->
       </div>
     </div>
     <div class="w-full px-4" v-if="step == 3">
@@ -280,7 +283,7 @@ export default defineComponent({
     const valid = ref(false);
     const isPasswordVisible = ref(false);
     const { loading, withLoader } = useLoader();
-    const { artforms, step, accountType, formData,reset, type, updateProgress, progress, typeSelected, isForOrganisation,orgTypes, goToStep, emailExists, next, organisation } =
+    const { artforms, step, accountType, formData, reset, type, updateProgress, progress, typeSelected, isForOrganisation,orgTypes, goToStep, emailExists, next, organisation } =
       useRegistrationData();
     
     const { setMessage } = useStatus();
@@ -315,7 +318,8 @@ export default defineComponent({
           return false;
         }
         if (response !== undefined && type == 'General_Public') {
-          router.push({ name: routeNames.profile.billing });
+          reset();
+          router.push({ name: routeNames.spaces.book });
         }
         if (response !== undefined && type == 'organisation') {
           goToStep(7);
@@ -344,7 +348,14 @@ export default defineComponent({
         updateProgress(20);
       }
     };
-
+    const goAheadToBilling = async () => {
+      reset();
+      router.push({ name: routeNames.profile.billing });
+    };
+    const noThankYou = async () => {
+      reset();
+      router.push({ name: routeNames.home });
+    };
     const checkRadio = async (value: string) => {
       formData.accountType = value;
     };
@@ -371,6 +382,7 @@ export default defineComponent({
       return '';
     };
 
+    console.log(formData, 'formData');
     return {
       type,
       isForOrganisation,
@@ -386,6 +398,8 @@ export default defineComponent({
       emailExists,
       register,
       updateUser,
+      goAheadToBilling,
+      noThankYou,
       organisation,
       checkTypeOfOrganization,
       checkRadioArtType,

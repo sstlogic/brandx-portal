@@ -144,7 +144,7 @@ export const routes: Array<RouteConfig> = [
     component: () => import('@/views/BookSpace/BookSpacePage.vue'),
     meta: {
       layout: 'MemberLayout',
-      middleware: [auth, member],
+      middleware: [auth],
     },
   },
 

@@ -49,7 +49,7 @@ const userDefaultData = {
   website: '',
   hear_from_us: '',
 };
-let formData = reactive(userDefaultData);
+const formData = reactive(userDefaultData);
 
 const type = ref<'individual' | 'organisation' | null>('individual');
 const typeSelected = computed(() => !!type.value);
@@ -65,7 +65,33 @@ const goToStep = (value: number) => (step.value = value);
 const progress = ref(0);
 
 const reset = () => {
-  formData = reactive(userDefaultData);
+  step.value = 1;
+  progress.value = 0;
+  formData.organisationName = '';
+  formData.organisationAbn = '';
+  formData.orgType = '';
+  formData.roleInOrg = '';
+  formData.organisationType = '';
+  formData.accountType = '';
+  formData.email = '';
+  formData.firstName = '';
+  formData.lastName = '';
+  formData.address = '';
+  formData.suburb = '';
+  formData.state = '';
+  formData.country = '';
+  formData.postcode = '';
+  formData.phone = '';
+  formData.artform = '';
+  formData.tcs = false;
+  formData.updates = false;
+  formData.insurance = 'No';
+  formData.password = '';
+  formData.accurate = '';
+  formData.website = '';
+  formData.hear_from_us = '';
+
+  console.log('Reset Form Data', formData);
 };
 
 const updateProgress = (value: number) => {

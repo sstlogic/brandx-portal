@@ -137,7 +137,7 @@ export default defineComponent({
       async () => checkIfEmailExists(),
       { debounce: 500, immediate: true }
     );
-
+    console.log(formData, 'formData');
     return {
       type,
       errors,
