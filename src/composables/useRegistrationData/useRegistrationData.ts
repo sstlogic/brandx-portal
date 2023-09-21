@@ -42,12 +42,13 @@ const userDefaultData = {
   artform: '',
   tcs: false,
   updates: false,
-  insurance: 'No',
+  insurance: '',
   password: '',
-
   accurate: '',
   website: '',
-  hear_from_us: '',
+  promo: '',
+  wk_ph: '',
+  hm_ph: '',
 };
 const formData = reactive(userDefaultData);
 
@@ -89,7 +90,7 @@ const reset = () => {
   formData.password = '';
   formData.accurate = '';
   formData.website = '';
-  formData.hear_from_us = '';
+  formData.promo = '';
 
   console.log('Reset Form Data', formData);
 };

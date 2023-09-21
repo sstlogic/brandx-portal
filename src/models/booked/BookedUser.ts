@@ -5,6 +5,7 @@ export type BookedUser = {
   lastName: string;
   emailAddress: string;
   phone: string;
+  wk_ph: string;
   lastLogin: string;
   statusId: string;
   Timezone: string;
@@ -23,5 +24,5 @@ export type BookedUser = {
   accountType: string;
   accurate: boolean;
   website: string;
-  hear_from_us: string;
+  promo: string;
 };

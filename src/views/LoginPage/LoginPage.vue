@@ -2,7 +2,7 @@
   <subscription-page title="Your Artist Pass" heading="Artist Pass Login">
     <div class="mt-5 mb-5 px-5 row">
       <div class="col-md-12 col-sm-12 sub-title-normal ">
-        <div class="tab-title padding-21">Artist Pass Login</div>
+        <div class="tab-title padding-21">Brand X Login</div>
         An Artist Pass is required to book a space with Brand X.<br />
         <div class="pt-1">
           Don't have one? <router-link :to="{ name: routeNames.auth.register }"> Subscribe here </router-link>

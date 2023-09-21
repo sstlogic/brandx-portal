@@ -15,7 +15,7 @@
     <div class="text-right pt-3 pb-3 sub-title-normal">
       <router-link :to="{ name: routeNames.auth.forgot }">Forgot Password</router-link>
     </div>
-    <div class="d-flex justify-center pt-2">
+    <div class="d-flex justify-end pt-2">
       <base-button black class="my-4" @click="login" :loading="loading">Login</base-button>
     </div>
   </v-form>

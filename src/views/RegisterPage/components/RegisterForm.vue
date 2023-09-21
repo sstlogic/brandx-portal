@@ -118,17 +118,12 @@ export default defineComponent({
     const login = async (email: string, password: string) =>
       withLoader(async () => {
         const user = await User.login({ email, password });
-
         if (user) {
           const { storeLogin } = useAuthStore();
-
           await storeLogin(user);
-          
           setTimeout(() => {
             router.push({ name: routeNames.subscriber });
           }, 1000);
-          
-          // router.push({ name: routeNames.profile.billing });
         }
       });
 
