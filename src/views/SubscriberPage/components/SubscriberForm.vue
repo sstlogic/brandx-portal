@@ -372,7 +372,7 @@ export default defineComponent({
     };
     const goAheadToBilling = async () => {
       reset();
-      router.push({ name: routeNames.profile.billing });
+      router.push({ name: routeNames.profile.subscribe });
     };
     const noThankYou = async () => {
       reset();

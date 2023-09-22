@@ -12,9 +12,8 @@
       </div>
       <div>
         Something not right?
-        <router-link :to="{ name: routeNames.bookingsCalendar, query: { id: currentSchedule.id } }"
-          >Edit Booking</router-link
-        >
+        <router-link :to="{ name: routeNames.bookingsCalendar, query: { id: currentSchedule.id } }">Edit
+          Booking</router-link>
       </div>
     </div>
     <div class="mb-4">
@@ -22,51 +21,37 @@
     </div>
     <div>
       <v-form v-model="valid">
-        <v-textarea
-          label="Describe the Activity"
-          v-model="currentBooking.description"
-          outlined
-          dense
+        <v-textarea label="Describe the Activity" v-model="currentBooking.description" outlined dense
           :rules="[rules.required]"
           placeholder="Describe your activity, the equipment you require and any other details we should know about."
-          persistent-placeholder
-        />
-        <v-text-field
-          label="How many people will be attending this booking?"
-          v-model="currentBooking.attendees"
-          outlined
-          dense
-          :rules="[rules.required, rules.min(0), capacityRule]"
-          hint="Enter a number"
-          persistent-hint
-        />
+          persistent-placeholder />
+        <v-text-field label="How many people will be attending this booking?" v-model="currentBooking.attendees" outlined
+          dense :rules="[rules.required, rules.min(0), capacityRule]" hint="Enter a number" persistent-hint />
         <div class="subtitle-1 mb-2">Select all that apply</div>
         <v-checkbox label="I am generating income from this activity" v-model="currentBooking.generatingIncome" dense />
         <v-checkbox label="Yes, I have received funding for this activity" v-model="currentBooking.funded" dense />
         <v-checkbox label="This booking is for an event" v-model="currentBooking.performance" dense />
       </v-form>
-      <div class="mb-2">
+      <!-- <div class="mb-2">
         <v-expand-transition>
           <quote-card v-if="price" :price="price" :loading="loading" />
         </v-expand-transition>
-      </div>
+      </div> -->
       <div class="mb-2">
         <v-checkbox v-model="terms" dense>
           <template #label>
             <p>
               I agree with Brand X hirers
               <a href="https://www.brandx.org.au/studio-hire-terms-and-conditions" target="_blank" @click.stop>
-                terms and conditions</a
-              >
+                terms and conditions</a>
             </p>
           </template>
         </v-checkbox>
       </div>
       <div class="d-flex">
         <v-spacer />
-        <base-button black :disabled="!valid || loading || !price || !terms" @click="confirm"
-          >Confirm Booking</base-button
-        >
+        <base-button black :disabled="!valid || loading || !price || !terms" @click="confirm">Confirm
+          Booking</base-button>
       </div>
 
       <v-dialog v-model="success" max-width="600">
