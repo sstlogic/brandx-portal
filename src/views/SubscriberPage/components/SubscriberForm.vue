@@ -98,7 +98,7 @@
     <!-- 1.003 Art Practice -->
     <div class="w-full px-4" v-if="step === 4">
       <div class="tab-title pt-4">
-        {{ 'We love ' + formData.accountType + '! 💛' }}
+        {{ 'We love ' + formData.accountType.replace('_', ' ') + '! 💛' }}
       </div>
       <div class="pt-4 sub-title-normal description-m">
         Help us get to know you and please answer the following questions..
@@ -226,7 +226,7 @@
     <div class="w-full px-4" v-if="step == 7">
       <div class="tab-title pt-4 mt-5">Amazing! You are registered.</div>
       <div class="tab-title pt-6">
-        Based on the information provided, you qualify for an {{ formData.accountType }} Artist Pass.
+        Based on the information provided, you qualify for an {{ formData.accountType.replace('_', ' ') }} Artist Pass.
       </div>
       <div class="text-h5 text-center subsidised-space-section image-container px-5 py-7 mt-7">
         <div class="diamond">
@@ -269,7 +269,7 @@
 </template>
 <script lang="ts">
 import BaseButton from '@/components/base/BaseButton.vue';
-import { defineComponent, ref, watchEffect } from '@/plugins/composition';
+import { defineComponent, ref } from '@/plugins/composition';
 import SubscriberText from './SubscriberText.vue';
 import { rules } from '@/composables/useValidation/validations';
 // import { debouncedWatch } from '@vueuse/core';
@@ -284,6 +284,7 @@ import { BookedUser } from '@/models/booked/BookedUser';
 import { useAuthStore } from '@/composables/useAuthStore';
 import { useStatus } from '@/composables/useStatus';
 import { useRouter } from '@/router/useRouter';
+import { User } from '@/models';
 
 export default defineComponent({
   components: { SubscriberText, BaseButton },
@@ -310,10 +311,10 @@ export default defineComponent({
       organisation,
     } = useRegistrationData();
     const { setMessage } = useStatus();
-    const { user, refreshState,isAuthed } = useAuthStore();
+    const { user, refreshState, isAuthed,storeLogin, getLocalAuth } = useAuthStore();
     const formDataSubmit = ref<BookedUser>({} as BookedUser);
     const { post, put } = useApi();
-    // console.log(user.value.data, 'user');
+    
     if (isAuthed) {
       if (formData.firstName == '') {
         formData.firstName = user?.value?.data?.firstName;
@@ -332,15 +333,22 @@ export default defineComponent({
       });
     };
 
-    watchEffect(() => {
-      // console.log(valid.value, 'valid watchEffect');
-      // console.log(step.value, 'step');
-    });
+    // watchEffect(() => {
+    //   console.log(valid.value, 'valid watchEffect');
+    //   console.log(step.value, 'step');
+    // });
 
     const updateUser = async (type: string) => {
       return withLoader(async () => {
         let uuid = user?.value?.data?.uuid ?? '';
         const response = await put(`/users/${uuid}`, snakeKeys(formData));
+        let authData = getLocalAuth();
+
+        if (authData !== undefined) {
+          let user: User = authData?.user as User;
+          user.data.customAttributes = response?.customAttributes as never;
+          await storeLogin(user);
+        }
         if (response === undefined) {
           return false;
         }

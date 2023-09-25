@@ -124,6 +124,9 @@ export default defineComponent({
           setTimeout(() => {
             router.push({ name: routeNames.subscriber });
           }, 1000);
+          if (window) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
         }
       });
 

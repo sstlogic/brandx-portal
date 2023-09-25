@@ -61,7 +61,12 @@ const step = ref(1);
 const next = () => step.value++;
 const prev = () => step.value--;
 // add specific value to step
-const goToStep = (value: number) => (step.value = value);
+const goToStep = (value: number) => {
+  if (window) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  step.value = value;
+};
 
 const progress = ref(0);
 

@@ -4,10 +4,11 @@
       <div>
         <p>Once payment is complete you will be emailed your Artist Pass confirmation and receipt.</p>
       </div>
-
       <v-sheet max-width="45%" class="border-yellow pa-2 my-2">
         <div>
-          <strong>{{ user.data.organisation ? 'Organisation' : 'Individual' }}</strong>
+          <strong>
+            {{ accountType == 'Arts_Organisation' ? 'Arts Organisation' : 'Individual' }}
+          </strong>
         </div>
         <div>{{ formatPrice(price) }}</div>
         <div>Per Year, Billed Yearly</div>
@@ -15,8 +16,7 @@
 
       <div>
         <p>
-          <strong
-            >Enter your card details. <br />
+          <strong>Enter your card details. <br />
             Your subscription will start immediately.
           </strong>
         </p>
@@ -75,14 +75,20 @@ export default defineComponent({
   setup() {
     const sub = ref<SubscribedResponse | null>(null);
     const price = ref(0);
-
+    const accountType = ref('');
     const { router } = useRouter();
     const dialog = ref(true);
     const { refreshState } = useAuthStore();
     const { user } = useAuthStore();
 
     onMounted(async () => {
+      await refreshState();
+      console.log(user.value, 'user');
       price.value = await user.value.getSubscriptionPrice();
+
+      let userData: any | undefined = user.value.data;
+      accountType.value = userData?.customAttributes?.account_type;
+      
     });
 
     const goToBilling = async () => {
@@ -98,6 +104,7 @@ export default defineComponent({
     return {
       goToBilling,
       susbcribed,
+      accountType,
       dialog,
       formatDate,
       sub,

@@ -19,6 +19,7 @@ export type UserData = {
   autoRenew: boolean;
   last4: string;
   existingMember: boolean;
+  customAttributes: never;
 };
 
 export type ExistsResponse = { email: string; exists: boolean };

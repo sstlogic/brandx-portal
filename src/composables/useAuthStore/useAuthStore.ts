@@ -3,7 +3,7 @@ import { computed, reactive, readonly } from '@/plugins/composition';
 import { useCreatingBooking } from '@/composables/useCreatingBooking';
 
 interface IAuthState {
-  user: User | null;
+  user: User | null | never;
 }
 
 const initialState: IAuthState = {
