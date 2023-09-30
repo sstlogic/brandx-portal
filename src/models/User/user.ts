@@ -20,6 +20,7 @@ export type UserData = {
   last4: string;
   existingMember: boolean;
   customAttributes: never;
+  token: string;
 };
 
 export type ExistsResponse = { email: string; exists: boolean };

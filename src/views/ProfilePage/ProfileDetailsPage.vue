@@ -8,22 +8,19 @@
         <v-text-field v-model="formData.organisationName" dense outlined label="Organisation Name (required)" />
 
         <!-- Org Type -->
-        <v-select
-          v-model="formData.organisationType"
-          :items="orgTypes"
-          dense
-          outlined
-          label="Organisation Type (required)"
-        />
+        <v-select v-model="formData.organisationType" :items="orgTypes" dense outlined
+          label="Organisation Type (required)" />
 
         <!-- Org ABN -->
-        <v-text-field
-          v-model="formData.organisationAbn"
-          dense
-          outlined
-          label="Organisation ABN (required)"
-          type="number"
-        />
+        <v-text-field v-model="formData.organisationAbn" dense outlined label="Organisation ABN (required)" />
+
+        <v-text-field v-model="formData.roleInOrg" dense outlined label="Role in Organisation (required)" />
+
+        <v-text-field v-model="formData.website" dense outlined label="website (optional)" />
+      </div>
+      <div v-if="user.data.organisation == false">
+        <div class="subtitle-1 mb-2">About</div>
+        <v-text-field v-model="formData.website" dense outlined label="website (optional)" />
       </div>
 
       <div>
@@ -36,31 +33,15 @@
       <div>
         <div>
           <!-- First Name -->
-          <v-text-field
-            v-model="formData.firstName"
-            dense
-            outlined
-            label="First Name (required)"
-            :rules="[rules.required]"
-          />
+          <v-text-field v-model="formData.firstName" dense outlined label="First Name (required)"
+            :rules="[rules.required]" />
 
           <!-- Last Name -->
-          <v-text-field
-            v-model="formData.lastName"
-            dense
-            outlined
-            label="Last Name (required)"
-            :rules="[rules.required]"
-          />
+          <v-text-field v-model="formData.lastName" dense outlined label="Last Name (required)"
+            :rules="[rules.required]" />
 
           <!-- Address -->
-          <v-text-field
-            v-model="formData.address"
-            dense
-            outlined
-            label="Address (required)"
-            :rules="[rules.required]"
-          />
+          <v-text-field v-model="formData.address" dense outlined label="Address (required)" :rules="[rules.required]" />
 
           <!-- Suburb -->
           <v-text-field v-model="formData.suburb" dense outlined label="Suburb (required)" :rules="[rules.required]" />
@@ -69,31 +50,16 @@
           <v-text-field v-model="formData.state" dense outlined label="State (required)" :rules="[rules.required]" />
 
           <!-- Country -->
-          <v-text-field
-            v-model="formData.country"
-            dense
-            outlined
-            label="Country (required)"
-            :rules="[rules.required]"
-          />
+          <v-text-field v-model="formData.country" dense outlined label="Country (required)" :rules="[rules.required]" />
 
           <!-- Postcode -->
-          <v-text-field
-            v-model="formData.postcode"
-            dense
-            outlined
-            label="Postcode (required)"
-            :rules="[rules.required]"
-          />
+          <v-text-field v-model="formData.postcode" dense outlined label="Postcode (required)"
+            :rules="[rules.required]" />
 
           <!-- Mobile -->
-          <v-text-field v-model="formData.phone" dense outlined label="Mobile (required)" :rules="[rules.required]" />
-
-          <v-radio-group
-            v-model="formData.insurance"
-            label="Do you have Public Liability Insurance?"
-            :rules="[rules.inArray(['Yes', 'No'])]"
-          >
+          <v-text-field v-model="formData.wk_ph" dense outlined label="Mobile (required)" :rules="[rules.required]" />
+          <v-radio-group v-model="formData.insurance" label="Do you have Public Liability Insurance?"
+            :rules="[rules.inArray(['Yes', 'No'])]" v-if="user.data.organisation">
             <v-radio value="Yes" label="Yes" />
             <v-radio value="No" label="No" />
           </v-radio-group>
@@ -102,14 +68,8 @@
           <div class="subtitle-1 mb-2">Artform Details</div>
 
           <!-- Artfrom -->
-          <v-select
-            v-model="formData.artform"
-            :items="artforms"
-            dense
-            outlined
-            label="Primary Artform (required)"
-            :rules="[rules.required]"
-          />
+          <v-select v-model="formData.artform" :items="artforms" dense outlined label="Primary Artform (required)"
+            :rules="[rules.required]" />
         </div>
         <div class="d-flex justify-center">
           <base-button black :disabled="!valid" @click="update" :loading="loading">Save</base-button>
@@ -154,10 +114,8 @@ export default defineComponent({
         if (formData.value.artform) {
           artforms.value.push(formData.value.artform);
         }
-      });
-
+      });  
     const { artforms, orgTypes } = useRegistrationData();
-
     const update = async () =>
       withLoader(async () => {
         const response = await user.value.updateUser(formData.value);

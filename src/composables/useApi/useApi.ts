@@ -3,6 +3,8 @@
 import { APIRequestConfig, APIResponse, IAPI, LoginCredentials, ResourceResponse } from './types';
 import { axios } from '@/plugins/axios';
 import { UserData } from '@/models';
+import { AxiosRequestConfig } from 'axios';
+import { useAuthStore } from '../useAuthStore';
 
 export const useApi = (): IAPI => {
   function baseUrl(options: APIRequestConfig = { scoped: true }): string {
@@ -23,6 +25,20 @@ export const useApi = (): IAPI => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function get<T = any>(url: string, options?: APIRequestConfig): APIResponse<T> {
+    const { token, getLocalToken } = useAuthStore();
+
+    const headers: AxiosRequestConfig['headers'] = {
+      'Content-Type': 'application/json', // Adjust the content type as needed
+    };
+    // console.log(token, 'tokenuseruseruser');
+    if (token.value == null) {
+      getLocalToken();
+    }
+    // console.log(token.value, 'tokenuseruseruser');
+    if (token.value) {
+      headers.Authorization = `Bearer ${token.value}`;
+      options = { ...options, headers };
+    }
     const response = await axios.get(url, config(options));
     if (options?.responseType === 'blob') {
       return response as any;
@@ -32,16 +48,59 @@ export const useApi = (): IAPI => {
   }
 
   async function $delete<T = any>(url: string, options?: APIRequestConfig): APIResponse<T> {
+    const { token, getLocalToken } = useAuthStore();
+
+    const headers: AxiosRequestConfig['headers'] = {
+      'Content-Type': 'application/json', // Adjust the content type as needed
+    };
+    // console.log(token, 'tokenuseruseruser');
+    if (token.value == null) {
+      getLocalToken();
+    }
+    // console.log(token.value, 'tokenuseruseruser');
+    if (token.value) {
+      headers.Authorization = `Bearer ${token.value}`;
+      options = { ...options, headers };
+    }
     const response = await axios.delete(url, config(options));
     return response.data;
   }
 
   async function post<T = any>(url: string, data: any = null, options?: APIRequestConfig): APIResponse<T> {
+    const { token, getLocalToken } = useAuthStore();
+
+    const headers: AxiosRequestConfig['headers'] = {
+      'Content-Type': 'application/json', // Adjust the content type as needed
+    };
+    // console.log(token, 'tokenuseruseruser');
+    if (token.value == null) {
+      getLocalToken();
+    }
+    // console.log(token.value, 'tokenuseruseruser');
+    if (token.value) {
+      headers.Authorization = `Bearer ${token.value}`;
+      options = { ...options, headers };
+    }
     const response = await axios.post(url, data, config(options));
     return response.data;
   }
 
   async function put(url: string, data: any = null, options?: APIRequestConfig): APIResponse {
+    const { token, getLocalToken } = useAuthStore();
+
+    const headers: AxiosRequestConfig['headers'] = {
+      'Content-Type': 'application/json', // Adjust the content type as needed
+    };
+    // console.log(token, 'tokenuseruseruser');
+    if (token.value == null) {
+      getLocalToken();
+    }
+    // console.log(token.value, 'tokenuseruseruser');
+    if (token.value) {
+      headers.Authorization = `Bearer ${token.value}`;
+      options = { ...options, headers };
+    }
+
     const response = await axios.put(url, data, config(options));
     return response.data;
   }

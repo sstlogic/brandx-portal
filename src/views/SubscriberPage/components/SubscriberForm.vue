@@ -234,7 +234,8 @@
         </div>
         <div class="subsidise-title">Subsidised space hire</div>
         <div class="subsidise-description pt-2">
-          A subscription costs {{ formData.accountType == "Artist" ? "$20.00": "$100.00" }} and provides you with great
+          A subscription costs {{ formData.accountType == "Individual" ? "$20.00": "$100.00" }} and provides you with
+          great
           benefits
           for the next 12-months.
         </div>
@@ -262,7 +263,7 @@
       </div>
     </div>
 
-    <div class="progress-bar" v-if="formData.accountType == 'Artist' && progress > 0">
+    <div class="progress-bar" v-if="formData.accountType == 'Individual' && progress > 0">
       <v-progress-linear :value="progress" :color="'#231F20'" :background-color="'#F4E44C'"></v-progress-linear>
     </div>
   </div>
@@ -360,19 +361,17 @@ export default defineComponent({
       });
     };
     const checkTypeOfOrganization = async () => {
-      if (formData.accountType === 'Artist') {
+      if (formData.accountType === 'Individual') {
         goToStep(4);
         updateProgress(20);
       } else if (formData.accountType === 'Arts_Organisation') {
         goToStep(3);
       } else if (formData.accountType === 'General_Public') {
-        console.log(formData.accountType, 'formData.accountType');
         await updateUser('General_Public');
       }
     };
     const updateArtistFlow = async (step: number) => {
       const res = await updateUser(formData.accountType);
-      console.log(res, 'res', formData.accountType);
       if (res !== undefined) {
         goToStep(step);
         updateProgress(20);

@@ -23,6 +23,7 @@ export type BookedUser = {
   organisationAbn: string;
   accountType: string;
   accurate: boolean;
+  roleInOrg: string;
   website: string;
   promo: string;
 };

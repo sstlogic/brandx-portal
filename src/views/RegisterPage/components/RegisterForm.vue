@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="pt-2">
+    <div class="">
       <v-form v-model="valid">
         <v-expand-transition>
           <div>
@@ -106,11 +106,8 @@ export default defineComponent({
     const register = async () => {
       withLoader(async () => {
         const response = await post('/users', snakeKeys(formData)).catch((errors) => mapErrors(errors));
-        console.log(response, 'response');
         if (response !== undefined) {
-          
           await login(formData.email, formData.password);
-          // router.push({ name: routeNames.subscriber });
         }
       });
     };
@@ -119,8 +116,12 @@ export default defineComponent({
       withLoader(async () => {
         const user = await User.login({ email, password });
         if (user) {
-          const { storeLogin } = useAuthStore();
+
+          const { storeLogin, setLocalToken } = useAuthStore();
           await storeLogin(user);
+          const tokenReturn = user.data.token;
+          setLocalToken(tokenReturn);
+
           setTimeout(() => {
             router.push({ name: routeNames.subscriber });
           }, 1000);
@@ -135,7 +136,6 @@ export default defineComponent({
       async () => checkIfEmailExists(),
       { debounce: 500, immediate: true }
     );
-    console.log(formData, 'formData');
     return {
       type,
       errors,

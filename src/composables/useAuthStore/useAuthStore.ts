@@ -5,12 +5,19 @@ import { useCreatingBooking } from '@/composables/useCreatingBooking';
 interface IAuthState {
   user: User | null | never;
 }
+interface IAuthTokenState {
+  Token: string | null | never;
+}
 
 const initialState: IAuthState = {
   user: null,
 };
+const initialTokenState: IAuthTokenState = {
+  Token: null,
+};
 
 const state = reactive({ ...initialState });
+const tokenState = reactive({ ...initialTokenState });
 
 export const useAuthStore = () => {
   const authState = readonly(state);
@@ -18,6 +25,7 @@ export const useAuthStore = () => {
   const isAuthed = computed(() => !!state.user);
 
   const user = computed(() => state.user as User);
+  const token = computed(() => tokenState.Token as string);
 
   const isMember = computed(() => user.value?.data.member);
 
@@ -57,7 +65,24 @@ export const useAuthStore = () => {
   };
 
   const clearLocalAuth = (): void => {
+    state.user = null;
+    tokenState.Token = null;
     window.localStorage.clear();
+  };
+
+  const setLocalToken = (token: string): void => {
+    tokenState.Token = token;
+    window.localStorage.setItem('token', JSON.stringify(tokenState));
+  };
+
+  const getLocalToken = (): string | null => {
+    const storedToken = window.localStorage.getItem('token');
+    // console.log(storedToken, 'storedToken');
+    const responseToken = storedToken ? JSON.parse(storedToken) : null;
+    if (responseToken) {
+      tokenState.Token = responseToken.Token;
+    }
+    return responseToken;
   };
 
   const storeLogout = (): void => {
@@ -82,5 +107,8 @@ export const useAuthStore = () => {
     refreshState,
     clearLocalAuth,
     isMember,
+    token,
+    setLocalToken,
+    getLocalToken,
   };
 };

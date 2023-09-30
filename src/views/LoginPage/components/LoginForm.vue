@@ -51,15 +51,15 @@ export default defineComponent({
 
     const login = async () =>
       withLoader(async () => {
-        const user = await User.login({ email: formData.email, password: formData.password }).catch((errors) =>
-          mapErrors(errors)
-        );
-
+        const user = await User.login({ email: formData.email, password: formData.password }).catch((errors) => {
+          mapErrors(errors);
+        });
         if (user) {
-          const { storeLogin } = useAuthStore();
+          const { storeLogin, setLocalToken } = useAuthStore();
 
           await storeLogin(user);
-
+          const tokenReturn = user.data.token;
+          setLocalToken(tokenReturn);
           if (user.data.member) {
             router.push({ name: routeNames.dashboard });
           } else {

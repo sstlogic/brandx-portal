@@ -17,7 +17,7 @@ const artforms = ref([
 
 const orgTypes = ['Government', 'Not For Profit', 'For Profit'];
 const accountType = [
-  { key: 'Artist', label: 'I am an individual artist', rate: 24.0 },
+  { key: 'Individual', label: 'I am an individual artist', rate: 24.0 },
   { key: 'Arts_Organisation', label: 'We are an arts organization', rate: 33.0 },
   { key: 'General_Public', label: 'I am neither, but I have a creative project', rate: 66.0 },
 ];
@@ -96,8 +96,6 @@ const reset = () => {
   formData.accurate = '';
   formData.website = '';
   formData.promo = '';
-
-  console.log('Reset Form Data', formData);
 };
 
 const updateProgress = (value: number) => {
