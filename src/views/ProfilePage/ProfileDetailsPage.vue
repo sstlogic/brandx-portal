@@ -114,7 +114,8 @@ export default defineComponent({
         if (formData.value.artform) {
           artforms.value.push(formData.value.artform);
         }
-      });  
+        formData.value.updateType = 'profile';
+      });
     const { artforms, orgTypes } = useRegistrationData();
     const update = async () =>
       withLoader(async () => {

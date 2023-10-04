@@ -253,12 +253,14 @@
       </div>
       <div class="tab-title mt-2">Do you want an artist pass?</div>
       <div class="d-flex justify-end pt-5 mt-5">
-        <div class="mr-3 px-2 py-2">
+        <div class="mr-3 px-2 pb-2">
           <!-- <router-link :to="{ name: routeNames.home }" class="rect-btn">No thanks</router-link> -->
           <div class="rect-btn" @click="noThankYou()">No thanks</div>
         </div>
         <!-- <router-link :to="{ name: routeNames.profile.billing }"> -->
-        <base-button black @click="goAheadToBilling()" id="ArtistPassSubscription">Yes please</base-button>
+        <div>
+          <base-button black @click="goAheadToBilling()" id="ArtistPassSubscription">Yes please</base-button>
+        </div>
         <!-- </router-link> -->
       </div>
     </div>
@@ -635,6 +637,7 @@ export default defineComponent({
     line-height: 35.16px;
     letter-spacing: 0em;
     padding: 6px 30px !important;
+    padding-bottom: 8px !important;
     color: #231F20 !important;
     text-decoration: none !important;
   }

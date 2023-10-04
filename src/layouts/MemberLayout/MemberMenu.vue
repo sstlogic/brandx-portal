@@ -93,10 +93,12 @@ export default defineComponent({
 <style scope lang="scss">
 .active-tab {
   color: white !important;
+
   &::before {
     background-color: black !important;
     opacity: 1 !important;
   }
+
   .v-list-item__title {
     z-index: 99 !important;
   }

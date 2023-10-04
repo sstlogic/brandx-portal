@@ -47,6 +47,14 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.theme--light.v-btn.v-btn--disabled {
+  color: #9F9F9F !important;
+}
+
+.theme--light.v-btn {
+  color: #F4E44C !important;
+}
+
 @media only screen and (min-width: 1025px) {
   .custom-btn {
     font-size: 30px !important;

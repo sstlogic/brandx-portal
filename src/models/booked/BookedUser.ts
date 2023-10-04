@@ -26,4 +26,5 @@ export type BookedUser = {
   roleInOrg: string;
   website: string;
   promo: string;
+  updateType: string;
 };

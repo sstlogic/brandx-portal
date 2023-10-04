@@ -49,6 +49,7 @@ const userDefaultData = {
   promo: '',
   wk_ph: '',
   hm_ph: '',
+  update_type: 'subscriber',
 };
 const formData = reactive(userDefaultData);
 
