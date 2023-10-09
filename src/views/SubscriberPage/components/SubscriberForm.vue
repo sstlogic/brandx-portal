@@ -38,7 +38,21 @@
         </div>
       </v-form>
     </div>
-
+    <!-- General Public intermediary page -->
+    <div class="w-full px-4" v-if="step == 2">
+      <div class="tab-title pt-8 pt-sm-4 padding-21">Congratulations, your account has been set up with Brand X.</div>
+      <div class="sub-title-normal padding-21">
+        {{ ' We’ve sent you an email with log in details for future reference. ' }}
+      </div>
+      <div class="sub-title-normal padding-21">
+        {{ 'You can now proceed to booking a space.' }}
+      </div>
+      <div class="d-flex justify-end py-10">
+        <router-link :to="{ name: routeNames.spaces.book }">
+          <base-button black id="GeneralPublic" :loading="loading"> Book Space </base-button>
+        </router-link>
+      </div>
+    </div>
     <!-- Help us get to know you -->
     <div class="w-full px-4" v-if="step === 3">
       <div class="tab-title pt-4">Help us get to know you. 💛</div>
@@ -51,7 +65,8 @@
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation ABN</span> (required)</div>
           <v-text-field v-model="formData.organisationAbn" name="organisationAbn" dense outlined label=""
             class="custom-text-field" :rules="[rules.required]" />
-          <div class="sub-title-normal pb-2"><span class="sub-title">Your role in the organisation</span> (required)</div>
+          <div class="sub-title-normal pb-2"><span class="sub-title">Your role in the organisation</span> (required)
+          </div>
           <v-text-field v-model="formData.roleInOrg" name="roleInOrg" dense class="custom-text-field" outlined label=""
             :rules="[rules.required]" />
           <div class="sub-title-normal pb-2">
@@ -356,8 +371,9 @@ export default defineComponent({
           return false;
         }
         if (response !== undefined && type == 'General_Public') {
-          reset();
-          router.push({ name: routeNames.spaces.book });
+          // reset();
+          // router.push({ name: routeNames.spaces.book });
+          goToStep(2);
         }
         return response;
       });

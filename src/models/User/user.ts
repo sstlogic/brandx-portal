@@ -19,7 +19,7 @@ export type UserData = {
   autoRenew: boolean;
   last4: string;
   existingMember: boolean;
-  customAttributes: never;
+  customAttributes: any;
   token: string;
 };
 

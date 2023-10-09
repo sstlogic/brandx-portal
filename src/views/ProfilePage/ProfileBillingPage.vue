@@ -1,13 +1,26 @@
 <template>
   <div>
     <div class="gray-card pa-4 mb-4">
-      <div class="font-weight-bold mb-4">Artist Pass Subscription</div>
-      <div v-if="!isMember" class="mb-4">
-        For full access to the Brand X Booking Calendar please pay for your subscription to continue.
-        <br />
-        <br />
-        A subscription will enable you to book space immediately at heavily subsidised rates for hire, as well as
-        receive discounts on tickets to our Flying Nun shows and Artist to Artist training programs.
+      <div v-if="user.data.customAttributes.account_type == 'General_Public'">
+        <div class="font-weight-bold mb-4">General Public</div>
+        <div v-if="!isMember" class="mb-4">
+          Artist Pass subscriptions are designed to support artists and arts organisations. A subscription is not
+          available with this account type. Feel there has been an error?
+        </div>
+      </div>
+      <div v-if="
+          user.data.customAttributes.account_type == 'Individual' ||
+          user.data.customAttributes.account_type == 'Arts_Organisation'
+        ">
+        <div class="font-weight-bold mb-4">Artist Pass Subscription</div>
+        <div v-if="!isMember" class="mb-4">
+          <!-- For full access to the Brand X Booking Calendar please pay for your subscription to continue.
+          <br />
+          <br /> -->
+          Get heavily subsidised studio rates and discounted tickets to our programs for 12 months with an Artist Pass.
+          Apply now as an arts organisation or professional artist (emerging or established) and activate your annual
+          subscription by completing the application form and payment.
+        </div>
       </div>
       <div v-if="isMember" class="d-flex justify-space-between">
         <div class="d-flex justify-center flex-column">
@@ -25,12 +38,10 @@
       </div>
       <v-expand-transition>
         <div v-show="editing && isMember" class="pt-4">
-          <base-button block @click="turnOffRenew" v-if="user.data.autoRenew" :loading="loading"
-            >Turn Off Auto Renew</base-button
-          >
-          <base-button block @click="turnOnRenew" v-if="!user.data.autoRenew" :loading="loading"
-            >Turn On Auto Renew</base-button
-          >
+          <base-button block @click="turnOffRenew" v-if="user.data.autoRenew" :loading="loading">Turn Off Auto
+            Renew</base-button>
+          <base-button block @click="turnOnRenew" v-if="!user.data.autoRenew" :loading="loading">Turn On Auto
+            Renew</base-button>
         </div>
       </v-expand-transition>
     </div>
@@ -90,7 +101,6 @@ export default defineComponent({
           editing.value = false;
         }
       });
-
     return {
       isMember,
       routeNames,

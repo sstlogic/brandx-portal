@@ -29,7 +29,7 @@
 
     <v-dialog v-if="sub" v-model="dialog" persistent max-width="500px">
       <v-card class="width_dialog">
-        <div class="d-flex mr-10 mt-3 justify-space-between pb-5 pt-5">
+        <div class="d-flex mr-10 mt-3 justify-space-between pb-0 pt-5">
           <v-app-bar-title class="pa-2">
             <v-img :src="require('@/assets/brandx-black.svg')" height="100%" max-height="75px" width="260px"
               @click="goHome" contain class="cursor-pointer logo-image" />
@@ -38,9 +38,9 @@
         </div>
         <v-card-title>
           <div class="d-flex justify-space-between">
-            <img :src="require('@/assets/svg/subscription-confirm-icon.svg')" height="100%" max-height="75px"
-              width="163px" />
-            <div class="text-h5 text-break mt-10 pt-10 pl-5">
+            <img :src="require('@/assets/svg/subscription-confirm-icon.svg')" height="100%" max-height="50px"
+              width="145px" />
+            <div class="text-h5 text-break mt-10 pt-5 pl-5">
               Your artist pass is <br />
               confirmed
             </div>
@@ -67,7 +67,7 @@
           <div class="mt-2">
             For any questions, contact us at
             <br />
-            bookings@brandx.org.au
+            <a href="mailto:bookings@brandx.org.au">bookings@brandx.org.au</a>
           </div>
         </v-card-text>
         <v-card-actions class="pb-5">
