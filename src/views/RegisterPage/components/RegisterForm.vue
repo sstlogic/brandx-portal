@@ -167,7 +167,7 @@ export default defineComponent({
 }
 
 .padding-21 {
-  padding-bottom: 21px;
+  padding-bottom: 9px;
 }
 
 .padding-42 {
@@ -175,7 +175,7 @@ export default defineComponent({
 }
 
 .padding-32 {
-  padding-bottom: 32px;
+  padding-bottom: 24px;
 }
 
 .alert-bg {

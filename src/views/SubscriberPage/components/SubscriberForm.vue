@@ -6,8 +6,8 @@
         Hi {{ formData.firstName }}! 👋 <br />
         Which best describes you?
       </div>
-      <div class="sub-title-normal padding-21">
-        Please select the choice that best describes your usage at Brand X so that we can tailor your experience.
+      <div class="sub-title-normal padding-21 pb-3">
+        Please select the option that best describes your situation so we can tailor your experience at Brand X.
       </div>
       <v-form v-model="valid">
         <div>
@@ -27,7 +27,7 @@
             </v-radio-group>
           </div>
           <!-- <v-sheet height="30px" /> -->
-          <div class="sub-title-normal padding-21">
+          <div class="sub-title-normal padding-42">
             <span class="sub-title">None of the above? </span>
             <a href="mailto:info@brandx.org.au">Get in touch</a>
           </div>
@@ -55,9 +55,9 @@
     </div>
     <!-- Help us get to know you -->
     <div class="w-full px-4" v-if="step === 3">
-      <div class="tab-title pt-4">Help us get to know you. 💛</div>
-      <div class="sub-title-normal pt-md-4 pb-md-2 py-sm-5">Tell us more about your organisation.</div>
-      <v-form v-model="valid" class="pt-4" id="help_us_form">
+      <div class="tab-title pt-4 padding-21">Help us get to know you. 💛</div>
+      <div class="sub-title-normal padding-21">Tell us more about your organisation.</div>
+      <v-form v-model="valid" class="pt-2" id="help_us_form">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation name</span> (required)</div>
           <v-text-field v-model="formData.organisationName" name="organisationName" dense class="custom-text-field"
@@ -112,14 +112,14 @@
 
     <!-- 1.003 Art Practice -->
     <div class="w-full px-4" v-if="step === 4">
-      <div class="tab-title pt-4">
+      <div class="tab-title pt-4 padding-21">
         {{ 'We love ' + formData.accountType.replace('_', ' ') + '! 💛' }}
       </div>
-      <div class="pt-4 sub-title-normal description-m">
+      <div class="sub-title-normal description-m ">
         Help us get to know you and please answer the following questions..
       </div>
       <div class="sub-title-normal description-m">What is your primary arts practice?</div>
-      <div class="sub-title-normal pt-2 description-m">Select one.</div>
+      <div class="sub-title-normal description-m">Please select one:</div>
       <v-form v-model="valid" id="form_art" class="">
         <div>
           <v-radio-group v-model="formData.artform" row :rules="[rules.required]" id="artform">
@@ -146,8 +146,8 @@
     <!-- 1.005 Contact Info -->
     <div class="w-full px-4" v-if="step == 5">
       <div class="tab-title pt-4 padding-21">Where can we contact you?</div>
-      <div class="sub-title-normal padding-32">For billing and under the rare occasion that we may need to
-        contact you.
+      <div class="sub-title-normal padding-32">
+        For billing and in the occasion that we may need to contact you please fill out your details below:
       </div>
       <v-form v-model="valid" class="">
         <div>
@@ -218,7 +218,7 @@
             By subscribing to the Brand X newsletter you’ll stay up to date with the latest programs,
             shows and residency information that we have to offer.
           </div>
-          <div class="sub-title-normal padding-21">Be the first to know and subscribe to our newsletter.</div>
+          <div class="sub-title-normal padding-21">Be the first to know and subscribe to our newsletter:</div>
           <div class="w-full">
             <v-radio-group row v-model="formData.promo" :rules="[rules.inArray(['Yes', 'No'])]" id="promo">
               <v-radio value="Yes" color="black" id="promo_yes" :ripple="false" />
@@ -497,21 +497,26 @@ export default defineComponent({
   /* Center the diamond */
 }
 
-.padding-21 {
-  padding-bottom: 21px;
-}
 
-.padding-42 {
-  padding-bottom: 42px;
-}
-
-.padding-32 {
-  padding-bottom: 32px;
-}
 
 /* desktop screen */
 @media only screen and (min-width: 1025px) {
+  .padding-21 {
+    padding-bottom: 1px !important;
+  }
 
+  .padding-42 {
+    padding-bottom: 42px !important;
+  }
+
+  .padding-32 {
+    padding-bottom: 2px !important;
+  }
+
+  .v-input--selection-controls {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
 
   .text-input-sub .theme--light.v-input {
     max-height: 60px;
@@ -667,8 +672,21 @@ export default defineComponent({
 
 /* Mobile screen */
 @media only screen and (max-width: 1024px) {
+
+  .padding-21 {
+    padding-bottom: 12px !important;
+  }
+
+  .padding-42 {
+    padding-bottom: 42px !important;
+  }
+
+  .padding-32 {
+    padding-bottom: 32px !important;
+  }
+
   .text-input-sub .theme--light.v-input {
-    max-height: 75px;
+    max-height: 70px;
   }
 
   .description-m {
@@ -728,14 +746,30 @@ export default defineComponent({
     left: -9999px;
   }
 
+  .v-input--selection-controls {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
+
   .art-radio {
     display: inline-block;
     border: 3px solid #231F20;
     border-radius: 40px;
-    padding: 5px 10px;
+    padding: 15px 20px !important;
   }
 
   .art-radio-active {
+    background-color: #F4E44C;
+  }
+
+  .org-rounded-radio {
+    display: inline-block;
+    border: 3px solid #231F20;
+    border-radius: 40px;
+    padding: 10px 20px;
+  }
+
+  .org-rounded-radio-active {
     background-color: #F4E44C;
   }
 

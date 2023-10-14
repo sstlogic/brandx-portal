@@ -7,7 +7,7 @@
       <v-sheet max-width="45%" class="border-yellow pa-2 my-2">
         <div>
           <strong>
-            {{ accountType == 'Arts_Organisation' ? 'Arts Organisation' : 'Individual' }}
+            {{ accountType == 'Arts_Organisation' ? 'Arts Organisations' : 'Individual' }}
           </strong>
         </div>
         <div>{{ formatPrice(price) }}</div>
