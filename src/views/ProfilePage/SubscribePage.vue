@@ -1,8 +1,22 @@
 <template>
   <member-page heading="Artist Pass Subscription" :show-title="false">
     <div>
-      <div>
-        <p>Once payment is complete you will be emailed your Artist Pass confirmation and receipt.</p>
+      <div class="py-2" v-if="accountType">
+        <div v-if="accountType == 'Arts_Organisation' || accountType == 'Individual'">
+          <!-- <p>Once payment is complete you will be emailed your Artist Pass confirmation and receipt.</p> -->
+          <p>
+            Get heavily subsidised studio rates and discounted tickets to our programs for 12 months with an Artist Pass.
+            Apply now as an arts organisation or professional artist (emerging or established) and activate your annual
+            subscription by completing the application form and payment.
+          </p>
+        </div>
+        <div v-else>
+          <p>
+            Artist Pass subscriptions are designed to support artists and arts organisations. A subscription is not
+            available with this account type. Feel there has been an error?
+            <a href="https://dev.brandx.org.au/contact">Contact Us</a>
+          </p>
+        </div>
       </div>
       <v-sheet max-width="45%" class="border-yellow pa-2 my-2">
         <div>
@@ -153,5 +167,4 @@ export default defineComponent({
 <style>
 .width_dialog {
   /* width: 500px; */
-}
-</style>
+}</style>

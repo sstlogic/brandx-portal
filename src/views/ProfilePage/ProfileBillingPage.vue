@@ -5,7 +5,8 @@
         <div class="font-weight-bold mb-4">General Public</div>
         <div v-if="!isMember" class="mb-4">
           Artist Pass subscriptions are designed to support artists and arts organisations. A subscription is not
-          available with this account type. Feel there has been an error?
+            available with this account type. Feel there has been an error?
+            <a href="https://dev.brandx.org.au/contact">Contact Us</a>
         </div>
       </div>
       <div v-if="

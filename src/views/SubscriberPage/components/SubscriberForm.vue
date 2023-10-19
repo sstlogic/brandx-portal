@@ -238,12 +238,29 @@
       </v-form>
     </div>
     <!-- 1.007 Artist Pass Subscription -->
-    <div class="w-full px-4" v-if="step == 7">
+    <div class="w-full px-4 " v-if="step == 7">
       <div class="tab-title pt-4 mt-5">Amazing! You are registered.</div>
       <div class="tab-title pt-6">
         Based on the information provided, you qualify for an {{ formData.accountType.replace('_', ' ') }} Artist Pass.
       </div>
-      <div class="text-h5 text-center subsidised-space-section image-container px-5 py-7 mt-7">
+      <div class="text-center w-full ">
+        <div class="text-h5 subsidised-space-section image-container px-14 py-7 mt-7 ">
+        <div class="diamond">
+          <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
+        </div>
+        <div class="subsidise-title">
+          An {{ formData.accountType.replace('_', ' ') }} Artist Pass benefits:
+        </div>
+        <div class="subsidise-description pt-2">
+          {{ formData.accountType == "Individual" ? "$20.00": "$100.00" }} subscription valid for 12 months
+        </div>
+        <div class="subsidise-description pt-2">Subsidised venue hire: starting at ${{ getType('rate') }}.00 p/hr</div>
+        <div class="subsidise-description pt-2">({{ getType('saving') }}% discount off standard $66 p/hr rate)</div>
+        
+      </div>
+      </div>
+      
+      <!-- <div class="text-h5 text-center subsidised-space-section image-container px-5 py-7 mt-7">
         <div class="diamond">
           <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
         </div>
@@ -257,7 +274,7 @@
         <div class="subsidise-description pt-5">
           Starting from ${{ getType('rate') }}.00 per hour {{ getType('saving') }}% saving off our standard rate at $66
         </div>
-      </div>
+      </div> -->
       <div class="mt-3 py-5">
         <div class="subsidise-title">Other benefits include</div>
         <div class="subsidise-description pt-1">Free access to A2A workshop programs (value $25)</div>
@@ -492,9 +509,14 @@ export default defineComponent({
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(-30px, -60px);
+  transform: translate(-30px, -50px);
   rotate: 5deg;
   /* Center the diamond */
+}
+.diamond-img{
+  /* width: 100%; */
+  height: 65px;
+  /* object-fit: cover; */
 }
 
 
