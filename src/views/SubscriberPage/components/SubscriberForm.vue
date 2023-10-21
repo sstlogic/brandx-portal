@@ -6,7 +6,7 @@
         Hi {{ formData.firstName }}! 👋 <br />
         Which best describes you?
       </div>
-      <div class="sub-title-normal padding-21 pb-3">
+      <div class="sub-title-normal padding-21 pb-4">
         Please select the option that best describes your situation so we can tailor your experience at Brand X.
       </div>
       <v-form v-model="valid">
@@ -17,7 +17,7 @@
                 <div :class="{
                       'rounded-label': true,
                       'rounded-label-active': formData.accountType === orgType.key,
-                  }" class="rounded-label d-flex my-2 pt-4 pb-2">
+                  }" class="rounded-label d-flex my-2 pt-4 pb-2 my-3">
                   <v-radio large :value="orgType.key" :ripple="false" color="black"> </v-radio>
                   <label class="sub-title rounded-label-text pl-4" @click="checkRadio(orgType.key)">
                     {{ orgType.label}}
@@ -56,50 +56,60 @@
     <!-- Help us get to know you -->
     <div class="w-full px-4" v-if="step === 3">
       <div class="tab-title pt-4 padding-21">Help us get to know you. 💛</div>
-      <div class="sub-title-normal padding-21">Tell us more about your organisation.</div>
+      <div class="sub-title-normal padding-21 pb-2">Tell us more about your organisation.</div>
       <v-form v-model="valid" class="pt-2" id="help_us_form">
         <div>
+
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation name</span> (required)</div>
-          <v-text-field v-model="formData.organisationName" name="organisationName" dense class="custom-text-field"
-            outlined label="" :rules="[rules.required]" />
+
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.organisationName" name="organisationName" dense class="custom-text-field"
+              outlined label="" :rules="[rules.required]" />
+          </div>
+
+
           <div class="sub-title-normal pb-2"><span class="sub-title">Organisation ABN</span> (required)</div>
-          <v-text-field v-model="formData.organisationAbn" name="organisationAbn" dense outlined label=""
-            class="custom-text-field" :rules="[rules.required]" />
+
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.organisationAbn" name="organisationAbn" dense outlined label=""
+              class="custom-text-field" :rules="[rules.required]" />
+          </div>
+
           <div class="sub-title-normal pb-2"><span class="sub-title">Your role in the organisation</span> (required)
           </div>
-          <v-text-field v-model="formData.roleInOrg" name="roleInOrg" dense class="custom-text-field" outlined label=""
-            :rules="[rules.required]" />
-          <div class="sub-title-normal pb-2">
+
+          <div class="text-input-sub">
+            <v-text-field v-model="formData.roleInOrg" name="roleInOrg" dense class="custom-text-field" outlined label=""
+              :rules="[rules.required]" />
+          </div>
+
+          <div class="sub-title-normal pb-1">
             <span class="sub-title">Please choose your organisation type</span> (required)
           </div>
-          <div>
-            <v-radio-group v-model="formData.organisationType" row :rules="[rules.required]" id="organisationType">
-              <div class="d-flex px-2" v-for="(item, index) in orgTypes" :key="index + '_'">
-                <div class="org-rounded-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
+          <v-radio-group v-model="formData.organisationType" row :rules="[rules.required]" id="organisationType">
+            <div class="d-flex px-2" v-for="(item, index) in orgTypes" :key="index + '_'">
+              <div class="org-rounded-radio py-sm-4 my-2 py-md-2 px-4 sub-title" :class="{
                       'org-rounded-radio': true,
                       'org-rounded-radio-active': formData.organisationType === item,
                 }">
-                  <label class="font-weight-bold" @click="checkRadioOrgType(item)">
-                    {{ item }}
-                  </label>
-                  <v-radio name="organisationType" :value="item" :ripple="false" color="black" class="hidden-radio">
-                  </v-radio>
-                </div>
+                <label class="font-weight-bold" @click="checkRadioOrgType(item)">
+                  {{ item }}
+                </label>
+                <v-radio name="organisationType" :value="item" :ripple="false" color="black" class="hidden-radio">
+                </v-radio>
               </div>
-            </v-radio-group>
+            </div>
+          </v-radio-group>
+          <div class="pb-2">
+            <span class="sub-title">Do you have Public liability Insurance?</span> (required)
           </div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 sub-title-normal">
-              <span class="sub-title">Do you have Public liability Insurance?</span> (required)
-            </div>
-            <div class="col-md-12 col-sm-12 insurance-radio">
-              <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]" id="insurance">
-                <v-radio value="Yes" name="insurance" id="yes_rd" color="black" :ripple="false" />
-                <label class="mr-3 text sub-title-normal" for="yes_rd">Yes</label>
-                <v-radio value="No" id="no_rd" name="insurance" color="black" :ripple="false" />
-                <label class="sub-title-normal" for="no_rd">No</label>
-              </v-radio-group>
-            </div>
+          <div class="text-input-sub">
+            <v-radio-group row v-model="formData.insurance" :rules="[rules.inArray(['Yes', 'No'])]" id="insurance">
+              <v-radio value="Yes" name="insurance" id="yes_rd" color="black" :ripple="false" />
+              <label class="mr-3 text sub-title-normal" for="yes_rd">Yes</label>
+              <v-radio value="No" id="no_rd" name="insurance" color="black" :ripple="false" />
+              <label class="sub-title-normal" for="no_rd">No</label>
+            </v-radio-group>
           </div>
           <div class="d-flex justify-end pt-5">
             <base-button black :disabled="!valid" @click="helpUsPage" id="HelpUs"
@@ -119,7 +129,7 @@
         Help us get to know you and please answer the following questions..
       </div>
       <div class="sub-title-normal description-m">What is your primary arts practice?</div>
-      <div class="sub-title-normal description-m">Please select one:</div>
+      <div class="sub-title-normal description-m padding-21 pb-3">Please select one:</div>
       <v-form v-model="valid" id="form_art" class="">
         <div>
           <v-radio-group v-model="formData.artform" row :rules="[rules.required]" id="artform">
@@ -146,16 +156,18 @@
     <!-- 1.005 Contact Info -->
     <div class="w-full px-4" v-if="step == 5">
       <div class="tab-title pt-4 padding-21">Where can we contact you?</div>
-      <div class="sub-title-normal padding-32">
+      <div class="sub-title-normal padding-32 pb-md-3">
         For billing and in the occasion that we may need to contact you please fill out your details below:
       </div>
       <v-form v-model="valid" class="">
         <div>
           <div class="sub-title-normal pb-2"><span class="sub-title">Mobile phone number</span> (required)</div>
+
           <div class="text-input-sub">
             <v-text-field v-model="formData.wk_ph" name="wk_ph" dense class="custom-text-field" outlined label=""
               :rules="[rules.required]" />
           </div>
+
           <div class="sub-title-normal pb-2"><span class="sub-title">Street Address</span> (required)</div>
           <div class="text-input-sub">
             <v-text-field v-model="formData.address" name="address" dense outlined label="" class="custom-text-field"
@@ -211,9 +223,9 @@
       </div>
       <v-form v-model="valid" class="">
         <div>
-          <div class="sub-title-normal pb-2"><span class="sub-title">Website URL</span> (optional)</div>
+          <div class="sub-title-normal pb-2 pt-md-3"><span class="sub-title">Website URL</span> (optional)</div>
           <v-text-field v-model="formData.website" dense class="custom-text-field" outlined />
-          <div class="tab-title pt-7 padding-21">Would you like to hear from us from time to time?</div>
+          <div class="tab-title pt-0 padding-21">Would you like to hear from us from time to time?</div>
           <div class="sub-title-normal padding-21">
             By subscribing to the Brand X newsletter you’ll stay up to date with the latest programs,
             shows and residency information that we have to offer.
@@ -245,36 +257,21 @@
       </div>
       <div class="text-center w-full ">
         <div class="text-h5 subsidised-space-section image-container px-14 py-7 mt-7 ">
-        <div class="diamond">
-          <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
+          <div class="diamond">
+            <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
+          </div>
+          <div class="subsidise-title">
+            An {{ formData.accountType.replace('_', ' ') }} Artist Pass benefits:
+          </div>
+          <div class="subsidise-description pt-2">
+            {{ formData.accountType == "Individual" ? "$20.00": "$100.00" }} subscription valid for 12 months
+          </div>
+          <div class="subsidise-description pt-2">Subsidised venue hire: starting at ${{ getType('rate') }}.00 p/hr</div>
+          <div class="subsidise-description pt-2">({{ getType('saving') }}% discount off standard $66 p/hr rate)</div>
+
         </div>
-        <div class="subsidise-title">
-          An {{ formData.accountType.replace('_', ' ') }} Artist Pass benefits:
-        </div>
-        <div class="subsidise-description pt-2">
-          {{ formData.accountType == "Individual" ? "$20.00": "$100.00" }} subscription valid for 12 months
-        </div>
-        <div class="subsidise-description pt-2">Subsidised venue hire: starting at ${{ getType('rate') }}.00 p/hr</div>
-        <div class="subsidise-description pt-2">({{ getType('saving') }}% discount off standard $66 p/hr rate)</div>
-        
       </div>
-      </div>
-      
-      <!-- <div class="text-h5 text-center subsidised-space-section image-container px-5 py-7 mt-7">
-        <div class="diamond">
-          <img alt="diamond" class="diamond-img" src="../../../assets/diamond.png" />
-        </div>
-        <div class="subsidise-title">Subsidised space hire</div>
-        <div class="subsidise-description pt-2">
-          A subscription costs {{ formData.accountType == "Individual" ? "$20.00": "$100.00" }} and provides you with
-          great
-          benefits
-          for the next 12-months.
-        </div>
-        <div class="subsidise-description pt-5">
-          Starting from ${{ getType('rate') }}.00 per hour {{ getType('saving') }}% saving off our standard rate at $66
-        </div>
-      </div> -->
+
       <div class="mt-3 py-5">
         <div class="subsidise-title">Other benefits include</div>
         <div class="subsidise-description pt-1">Free access to A2A workshop programs (value $25)</div>
@@ -513,7 +510,8 @@ export default defineComponent({
   rotate: 5deg;
   /* Center the diamond */
 }
-.diamond-img{
+
+.diamond-img {
   /* width: 100%; */
   height: 65px;
   /* object-fit: cover; */
@@ -541,7 +539,7 @@ export default defineComponent({
   }
 
   .text-input-sub .theme--light.v-input {
-    max-height: 60px;
+    max-height: 55px;
   }
 
   .custom-text-field .v-input__slot {

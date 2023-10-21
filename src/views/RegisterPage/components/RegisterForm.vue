@@ -1,7 +1,7 @@
 <template>
   <div class=" px-4">
     <div class="tab-title pt-4 padding-21">Create a Brand X Account</div>
-    <div class="sub-title-normal padding-32">To book a space or sign up for Artist Pass Access first make an account.
+    <div class="sub-title-normal pb-md-5 pb-5">To book a space or sign up for Artist Pass Access first make an account.
     </div>
     <div v-if="emailExists && formData.email">
       <div class="d-flex alert-bg">
@@ -175,7 +175,7 @@ export default defineComponent({
 }
 
 .padding-32 {
-  padding-bottom: 24px;
+  padding-bottom: 28px !important;
 }
 
 .alert-bg {
@@ -191,7 +191,7 @@ export default defineComponent({
 
   /* Your CSS styles for desktop screens go here */
   .text-input-sub .theme--light.v-input {
-    max-height: 60px;
+    max-height: 55px;
   }
 
   .custom-text-field .v-input__slot {
