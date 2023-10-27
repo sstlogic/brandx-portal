@@ -5,8 +5,8 @@
         <div class="font-weight-bold mb-4">General Public</div>
         <div v-if="!isMember" class="mb-4">
           Artist Pass subscriptions are designed to support artists and arts organisations. A subscription is not
-            available with this account type. Feel there has been an error?
-            <a href="https://dev.brandx.org.au/contact">Contact Us</a>
+          available with this account type. Feel there has been an error?
+          <!-- <a href="https://dev.brandx.org.au/contact">Contact Us</a> -->
         </div>
       </div>
       <div v-if="
@@ -23,20 +23,26 @@
           subscription by completing the application form and payment.
         </div>
       </div>
-      <div v-if="isMember" class="d-flex justify-space-between">
-        <div class="d-flex justify-center flex-column">
-          <div>Subscriber since: {{ formatDate(user.data.memberSince) }}</div>
-          <div>Subscriber expiry: {{ formatDate(user.data.memberExpiry) }}</div>
-          <div v-if="user.data.memberRenewal">Renewal date: {{ formatDate(user.data.memberRenewal) }}</div>
-          <div v-if="!user.data.existingMember">Auto-renew: {{ user.data.autoRenew ? 'On' : 'Off' }}</div>
+      <template v-if="user.data.customAttributes.account_type == 'Individual' ||
+          user.data.customAttributes.account_type == 'Arts_Organisation'">
+        <div v-if="isMember" class="d-flex justify-space-between">
+          <div class="d-flex justify-center flex-column">
+            <div>Subscriber since: {{ formatDate(user.data.memberSince) }}</div>
+            <div>Subscriber expiry: {{ formatDate(user.data.memberExpiry) }}</div>
+            <div v-if="user.data.memberRenewal">Renewal date: {{ formatDate(user.data.memberRenewal) }}</div>
+            <div v-if="!user.data.existingMember">Auto-renew: {{ user.data.autoRenew ? 'On' : 'Off' }}</div>
+          </div>
+          <div class="d-flex justify-center flex-column">
+            <base-button @click="editing = true" v-show="!editing && !user.data.existingMember">Edit</base-button>
+          </div>
         </div>
-        <div class="d-flex justify-center flex-column">
-          <base-button @click="editing = true" v-show="!editing && !user.data.existingMember">Edit</base-button>
+        <div v-else>
+          <base-button :to="{ name: routeNames.profile.subscribe }">Pay Now</base-button>
         </div>
-      </div>
-      <div v-else>
-        <base-button :to="{ name: routeNames.profile.subscribe }">Pay Now</base-button>
-      </div>
+      </template>
+      <template v-if="user.data.customAttributes.account_type == 'General_Public'">
+        <base-button :to="{name: routeNames.contact}">Contact Us</base-button>
+      </template>
       <v-expand-transition>
         <div v-show="editing && isMember" class="pt-4">
           <base-button block @click="turnOffRenew" v-if="user.data.autoRenew" :loading="loading">Turn Off Auto
@@ -46,6 +52,7 @@
         </div>
       </v-expand-transition>
     </div>
+
     <div v-if="isMember || user.data.last4">
       <payment-methods />
     </div>

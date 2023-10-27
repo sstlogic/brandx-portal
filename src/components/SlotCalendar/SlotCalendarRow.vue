@@ -13,19 +13,10 @@
       </v-sheet>
     </div>
     <div class="d-flex align-center">
-      <v-sheet
-        :width="getWidth(slot)"
-        v-for="(slot, index) in slots"
-        :key="index"
-        class="slot text-center"
-        :class="{
+      <v-sheet :width="getWidth(slot)" v-for="(slot, index) in slots" :key="index" class="slot text-center" :class="{
           reservable: slot.isReservable,
           'cursor-pointer': slot.isReservable,
-        }"
-        :color="getColour(slot)"
-        height="30px"
-        @click="selectSlot(slot)"
-      >
+        }" :color="getColour(slot)" height="30px" @click="selectSlot(slot)">
         <div v-if="isAuthed && isMember">
           {{ showIcon(slot) ? '+' : '' }}
         </div>
@@ -181,11 +172,13 @@ export default defineComponent({
     border-right: 1px solid var(--v-darkGray-darken1) !important;
   }
 }
+
 .slot {
   border-radius: 15px;
   margin: 0.5rem 5px;
   padding: 0.125rem 0px;
   white-space: nowrap;
+
   &.reservable {
     border: 1px solid;
     border-color: var(--v-lightYellow-darken1) !important;

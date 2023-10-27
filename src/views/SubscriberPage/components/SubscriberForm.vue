@@ -123,7 +123,12 @@
     <!-- 1.003 Art Practice -->
     <div class="w-full px-4" v-if="step === 4">
       <div class="tab-title pt-4 padding-21">
-        {{ 'We love ' + formData.accountType.replace('_', ' ') + '! 💛' }}
+        We love
+        {{
+        formData.accountType == 'Individual'
+        ? formData.accountType.replace('_', ' ') + ' Artists'
+        : formData.accountType.replace('_', ' ') + 's'
+        }}! 💛
       </div>
       <div class="sub-title-normal description-m ">
         Help us get to know you and please answer the following questions..
@@ -131,7 +136,7 @@
       <div class="sub-title-normal description-m">What is your primary arts practice?</div>
       <div class="sub-title-normal description-m padding-21 pb-3">Please select one:</div>
       <v-form v-model="valid" id="form_art" class="">
-        <div>
+        <div class="artist arts items">
           <v-radio-group v-model="formData.artform" row :rules="[rules.required]" id="artform">
             <div class="d-flex px-2" v-for="(itemArt, index) in artforms" :key="index">
               <div class="art-radio my-2 py-sm-4 py-md-2 px-4 sub-title" :class="{
@@ -274,7 +279,9 @@
 
       <div class="mt-3 py-5">
         <div class="subsidise-title">Other benefits include</div>
-        <div class="subsidise-description pt-1">Free access to A2A workshop programs (value $25)</div>
+        <div class="subsidise-description pt-1">
+          Free access to all of our upcoming Artist 2 Artists (A2A) programs (value $25 each)
+        </div>
         <div class="subsidise-description pt-2">$5 off all tickets to our Flying Nun shows</div>
         <div class="subsidise-description pt-2">Exclusive invitations to our launches and events</div>
         <div class="subsidise-description pt-2">Networking opportunities with artists in Sydney</div>

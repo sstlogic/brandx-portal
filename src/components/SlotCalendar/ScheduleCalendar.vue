@@ -7,13 +7,8 @@
           <div>To continue with your booking please select a space where all times requested are available.</div>
         </div>
         <div v-for="resource in availableResources" :key="resource.id">
-          <resource-calendar
-            class="mb-8"
-            :resource="resource"
-            :loading="loading"
-            @input="selectSlot($event, resource)"
-            :guest="guest"
-          />
+          <resource-calendar class="mb-8" :resource="resource" :loading="loading" @input="selectSlot($event, resource)"
+            :guest="guest" />
         </div>
 
         <v-divider class="mb-8 mt-4" />
@@ -29,26 +24,16 @@
         </div>
 
         <div v-for="resource in unavailableResources" :key="resource.id">
-          <resource-calendar
-            class="mb-8"
-            :resource="resource"
-            :loading="loading"
-            @input="selectSlot($event, resource)"
-            :guest="guest"
-          />
+          <resource-calendar class="mb-8" :resource="resource" :loading="loading" @input="selectSlot($event, resource)"
+            :guest="guest" />
         </div>
       </div>
     </div>
 
     <div v-else>
       <div v-for="resource in resources" :key="resource.id">
-        <resource-calendar
-          class="mb-8"
-          :resource="resource"
-          :loading="loading"
-          @input="selectSlot($event, resource)"
-          :guest="guest"
-        />
+        <resource-calendar class="mb-8" :resource="resource" :loading="loading" @input="selectSlot($event, resource)"
+          :guest="guest" />
       </div>
     </div>
 
@@ -246,6 +231,7 @@ export default defineComponent({
   width: min-content;
   display: flex;
 }
+
 .row-day {
   &-wrapper {
     position: sticky;
@@ -258,9 +244,11 @@ export default defineComponent({
     border-right: 1px solid var(--v-darkGray-darken1) !important;
   }
 }
+
 .hour {
   text-align: center;
 }
+
 .calendar {
   border: 1px solid var(--v-darkGray-darken1) !important;
 }

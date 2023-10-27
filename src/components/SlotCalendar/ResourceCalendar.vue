@@ -16,9 +16,8 @@
           </div>
           <v-spacer />
           <v-fade-transition>
-            <base-button v-if="isRepeating && available" :disabled="!available" @click="selectResource"
-              >Select</base-button
-            >
+            <base-button v-if="isRepeating && available" :disabled="!available"
+              @click="selectResource">Select</base-button>
           </v-fade-transition>
         </div>
 
@@ -28,25 +27,14 @@
               <v-sheet width="50px" color="transparent" class="row-day"> </v-sheet>
             </div>
             <div class="d-flex">
-              <v-sheet
-                v-for="i in Array(24).keys()"
-                :key="i"
-                width="160px"
-                class="hour py-1"
-                :ref="i == startHour ? 'currentHour' : ''"
-              >
+              <v-sheet v-for="i in Array(24).keys()" :key="i" width="160px" class="hour py-1"
+                :ref="i == startHour ? 'currentHour' : ''">
                 {{ formatHour(i) }}
               </v-sheet>
             </div>
           </div>
-          <slot-calendar-row
-            v-for="(group, index) in groupSlots(resource)"
-            :key="index"
-            :date="group.date"
-            :slots="group.slots"
-            :resource="resource"
-            @input="emit('input', $event)"
-          />
+          <slot-calendar-row v-for="(group, index) in groupSlots(resource)" :key="index" :date="group.date"
+            :slots="group.slots" :resource="resource" @input="emit('input', $event)" />
         </div>
       </div>
     </v-fade-transition>
@@ -114,14 +102,14 @@ export default defineComponent({
     const { groupSlots } = useBookedSchedules();
 
     const { repeatingType, isRepeating, currentResource, repeatingOptions } = useCreatingBooking();
-
+    
     watch(
       () => repeatingOptions.value.startTime,
       () => {
         scrollToCurrentHour();
       }
     );
-
+      console.log(props.resource, 'props.resource');
     const selectResource = () => {
       currentResource.value = props.resource;
     };
@@ -164,6 +152,7 @@ export default defineComponent({
   display: flex;
   width: min-content;
 }
+
 .row-day {
   &-wrapper {
     position: sticky;
@@ -176,9 +165,11 @@ export default defineComponent({
     border-right: 1px solid var(--v-darkGray-darken1) !important;
   }
 }
+
 .hour {
   text-align: center;
   position: relative;
+
   &::before {
     content: '';
     position: absolute;
@@ -188,10 +179,12 @@ export default defineComponent({
     height: 100vh;
   }
 }
+
 .calendar {
   border: 1px solid var(--v-darkGray-darken1) !important;
   overflow-y: hidden !important;
 }
+
 .resource-name {
   border-left: 4px solid black;
 }
